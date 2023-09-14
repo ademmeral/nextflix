@@ -1,5 +1,6 @@
 import {AiOutlinePlusCircle} from 'react-icons/ai';
 import './style.css';
+import { compact } from '@/utils/utils';
 
 type Props = {
   movie : Record<string, any>
@@ -18,7 +19,7 @@ function FeaturedMovie({movie}:Props) {
       </figure>
       <article>
         <h2>{movie.original_title}</h2>
-        <p>{movie.overview}</p>
+        <p>{compact(movie.overview, 200)}</p>
       </article>
       <div className="buttons">
         <button type="button" className='btn'>Play</button>
