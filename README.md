@@ -13,7 +13,7 @@ Since the app requires an access token to TMDB Movie API, I didnt deploy it.
 If you wanna test it in you local environment ;
 * ## Construction
   1. First, you must have had an access token to TMDB Movie API
-  2. Run terminal then type <code>git clone github.com/ademmeral/nextflix</code>
+  2. Run terminal then type <code>git clone https://github.com/ademmeral/nextflix.git</code>
   3. <code>cd Path/nextflix</code>
   4. <code>code .</code> This will open the folder directly in your VSCode
   5. Create a <code>.env</code> file then put your access token in
