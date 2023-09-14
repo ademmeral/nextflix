@@ -1,0 +1,30 @@
+
+/* ========== FEATURED MOVIE ========== */
+.featured-movie-wrapper,
+.loader{
+  @apply min-h-[400px] flex flex-col text-white justify-end gap-[1.5rem] pb-10
+}
+.loader{
+  @apply h-[300px] justify-center
+}
+.featured-movie-wrapper article{
+  @apply flex flex-col gap-[.5rem]
+}
+.featured-movie-wrapper article h2{
+  @apply text-5xl font-bold
+}
+.featured-movie-wrapper article :where(h2,p){
+  @apply max-w-[70%]
+}
+.featured-movie-wrapper article p {
+  @apply text-xl font-medium
+}
+.featured-movie-wrapper figure{
+  @apply -z-20 w-full min-h-[100vh] fixed top-0 left-0 bg-no-repeat bg-cover bg-center
+}
+.featured-movie-wrapper figure img{
+  @apply hidden
+}
+.featured-movie-wrapper .buttons{
+  @apply flex gap-[.5rem] max-h-full
+}

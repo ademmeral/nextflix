@@ -1,0 +1,74 @@
+/* ========== MOVIES ========== */
+.categories{
+  @apply flex flex-col gap-[1rem] text-white
+}
+.category h3{
+  @apply text-3xl font-semibold mb-5 border-b border-white/20 pb-2
+}
+.movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: .5rem;
+}
+.movie a{
+  @apply overflow-hidden
+}
+.movie a img{
+  @apply hover:scale-110 ease-in duration-200
+}
+.load-btn{
+  @apply py-2 px-16 bg-slate-900 self-center border border-white/50 rounded-md
+}
+
+/* ============== SKELETON ============= */
+.skeleton h3{
+  position: relative;
+
+  width: 200px;
+  height: 60px;
+
+  background: #999;
+}
+.skeleton .movies{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.skeleton .movies .movie{
+  width: 100%;
+  background: #999;
+}
+.skeleton .movie{
+  position: relative;
+  height: 300px;
+}
+
+.skeleton .movies > *::after,
+.skeleton h3::after{
+  content: '';
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+
+  background: linear-gradient(
+      120deg,
+      #b5b5b5 30%,
+      #d2d2d2 38%,
+      #d2d2d2 40%,
+      #b5b5b5 48%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: load 2s infinite;
+}
+
+@keyframes load {
+  100%{
+    background-position: -100% 0;
+  }
+}

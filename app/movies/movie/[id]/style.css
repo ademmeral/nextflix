@@ -1,0 +1,31 @@
+.single-movie,
+.loader{
+  @apply min-h-[400px] h-calc flex flex-col justify-center gap-[.5rem] text-white
+}
+.loader{
+  @apply items-center
+}
+.single-movie article{
+  @apply flex flex-col gap-[1rem]
+}
+.single-movie article h2{
+  @apply text-5xl font-bold
+}
+.single-movie article :where(h2,p){
+  @apply max-w-[70%]
+}
+.single-movie article p {
+  @apply text-xl font-medium
+}
+.single-movie figure{
+  @apply -z-20 w-full h-full fixed top-0 left-0 bg-no-repeat bg-cover bg-center
+}
+.single-movie figure img{
+  @apply hidden
+}
+.single-movie .buttons{
+  @apply flex gap-[.5rem] max-h-full mt-[1rem]
+}
+.single-movie .btn{
+  @apply py-3 px-20 bg-white text-slate-900 text-xl font-semibold rounded-full
+}

@@ -1,0 +1,13 @@
+.header{
+  @apply bg-gradient-to-b from-slate-800 to-transparent text-white
+}
+.nav {
+  @apply h-[60px] flex justify-between items-center text-2xl
+}
+
+.logo-wrapper{
+  @apply flex gap-[.5rem] items-center
+}
+.links{
+  @apply flex gap-[1rem] items-center text-xl
+}
