@@ -48,10 +48,7 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
     parent.addEventListener('pointerdown', handleMouseDown);
     parent.addEventListener('pointerup', handleMouseUp);
     parent.addEventListener('pointermove', dragging);
-    parent.addEventListener('mouseleave', () => {
-      console.log('leave')
-      isDragging = false
-    });
+    parent.addEventListener('mouseleave', () => isDragging = false);
 
     // Adding EventListener to Arrows
     arrows.forEach(ar => ar.addEventListener('click',
