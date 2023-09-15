@@ -38,7 +38,7 @@ body:has(.loader, .error, .not-found){
   @apply py-1 px-20 bg-white text-slate-900 text-xl font-semibold rounded-full
 }
 .hide{
-  display: none !important;
+  width: 0 !important;
 }
 a{
   display: block;
@@ -47,6 +47,10 @@ a{
 }
 a.go-home{
   @apply text-white/50 underline underline-offset-4 text-center
+}
+/*====== ANIMATION FOR SHADOWS ====== */
+@keyframes slide {
+  
 }
 /*====== SPINNER ====== */
 .spinner{

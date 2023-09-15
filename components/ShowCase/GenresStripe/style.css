@@ -6,6 +6,9 @@
 .genres{
   @apply flex gap-[1rem] max-w-full overflow-x-scroll bg-slate-900/60 p-[.5rem]
 }
+.genres{
+  scroll-behavior: smooth;
+}
 .dragging{
   scroll-behavior: smooth;
   cursor: grab;
@@ -14,7 +17,7 @@
   @apply flex items-center px-10 h-[60px] bg-slate-900 text-white font-medium border-[1px] border-slate-200/30 rounded-md whitespace-nowrap
 }
 .genres-stripe-wrapper .shadow{
-  @apply w-[80px] h-full flex items-center justify-center absolute top-0 z-10 rounded-md from-slate-900 from-90% to-transparent text-slate-200/80
+  @apply w-[80px] h-full flex items-center justify-center absolute top-0 z-10 rounded-md from-slate-900 from-90% to-transparent text-slate-200/80 transition-[width] duration-200 overflow-hidden
 }
 .shadow button{
   @apply p-[.5rem] border-[1px] border-slate-200/30 rounded-full
