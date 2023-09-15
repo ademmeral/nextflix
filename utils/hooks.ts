@@ -15,7 +15,7 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
     // Getting elements with the given class names
     const parent = document.querySelector(obj.parent) as HTMLUListElement
     const arrows = document.querySelectorAll<HTMLElement>(obj.arrows)
-    handleIcons(); // Checking scrollX. If it's greater than max hide or else do nothing;
+    // handleIcons(); // Checking scrollX. If it's greater than max hide or else do nothing;
     // Checking if the elements have been found, otherwise throw an Error
     if (!(parent || arrows))
       throw new Error('There are no such elements. Please check the classes');
@@ -45,10 +45,11 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
     };
     const handleMouseDown = () => isDragging = true //setIsDragging(true)
     const handleMouseUp = () => isDragging = false // setIsDragging(false)
+    const handleMouseLeave = () => isDragging = false
     parent.addEventListener('pointerdown', handleMouseDown);
     parent.addEventListener('pointerup', handleMouseUp);
     parent.addEventListener('pointermove', dragging);
-    parent.addEventListener('mouseleave', () => isDragging = false);
+    parent.addEventListener('mouseleave', handleMouseLeave);
 
     // Adding EventListener to Arrows
     arrows.forEach(ar => ar.addEventListener('click',
@@ -81,6 +82,7 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
         parent.removeEventListener('pointerdown', handleMouseDown);
         parent.removeEventListener('pointerup', handleMouseUp);
         parent.removeEventListener('pointermove', dragging);
+        parent.removeEventListener('mouseleave', handleMouseLeave);
         parent.childNodes.forEach(el => {
           el.removeEventListener('click', handleChildrenClicks);
         })
