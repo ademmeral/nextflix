@@ -84,6 +84,9 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
         parent.removeEventListener('pointerdown', handleMouseDown);
         parent.removeEventListener('pointerup', handleMouseUp);
         parent.removeEventListener('pointermove', dragging);
+        parent.childNodes.forEach(el => {
+          el.removeEventListener('click', handleChildrenClicks);
+        })
       };
       if(timeout)
         clearTimeout(timeout);
