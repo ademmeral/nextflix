@@ -46,11 +46,12 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
     const handleMouseDown = () => isDragging = true; 
     const handleMouseUp = () => isDragging = false;
     const handleMouseLeave = () => isDragging = false;
+    const handleScroll = () => handleIcons();
     parent.addEventListener('pointerdown', handleMouseDown);
     parent.addEventListener('pointerup', handleMouseUp);
     parent.addEventListener('pointermove', dragging);
     parent.addEventListener('mouseleave', handleMouseLeave);
-    parent.addEventListener('scroll', handleIcons);
+    parent.addEventListener('scroll', handleScroll);
 
     // Adding EventListener to Arrows
     arrows.forEach(ar => ar.addEventListener('click',
@@ -84,7 +85,7 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
         parent.removeEventListener('pointerup', handleMouseUp);
         parent.removeEventListener('pointermove', dragging);
         parent.removeEventListener('mouseleave', handleMouseLeave);
-        parent.addEventListener('scroll', handleIcons);
+        parent.removeEventListener('scroll', handleScroll);
 
         parent.childNodes.forEach(el => {
           el.removeEventListener('click', handleChildrenClicks);
