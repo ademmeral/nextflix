@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 
 export function useSlider(obj = { parent: '', arrows: '' }) {
@@ -43,13 +43,14 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
       e.stopPropagation();
       parent.scrollLeft -= e.movementX;
     };
-    const handleMouseDown = () => isDragging = true //setIsDragging(true)
-    const handleMouseUp = () => isDragging = false // setIsDragging(false)
-    const handleMouseLeave = () => isDragging = false
+    const handleMouseDown = () => isDragging = true; 
+    const handleMouseUp = () => isDragging = false;
+    const handleMouseLeave = () => isDragging = false;
     parent.addEventListener('pointerdown', handleMouseDown);
     parent.addEventListener('pointerup', handleMouseUp);
     parent.addEventListener('pointermove', dragging);
     parent.addEventListener('mouseleave', handleMouseLeave);
+    parent.addEventListener('scroll', handleIcons);
 
     // Adding EventListener to Arrows
     arrows.forEach(ar => ar.addEventListener('click',
@@ -60,7 +61,7 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
           : target.classList.contains('right')
             ? 350
             : 0;
-        timeout = window.setTimeout(() => handleIcons(), 50);
+        timeout = window.setTimeout(handleIcons, 50);
       }) // addEvListener for Arrows
     ); // forEach
 
@@ -71,7 +72,7 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
       x > 0
         ? arrows[0].classList.remove('hide')
         : arrows[0].classList.add('hide');
-      xMax > x
+      xMax > x + 1
         ? arrows[1].classList.remove('hide')
         : arrows[1].classList.add('hide');
     } // handleIcons
@@ -83,6 +84,8 @@ export function useSlider(obj = { parent: '', arrows: '' }) {
         parent.removeEventListener('pointerup', handleMouseUp);
         parent.removeEventListener('pointermove', dragging);
         parent.removeEventListener('mouseleave', handleMouseLeave);
+        parent.addEventListener('scroll', handleIcons);
+
         parent.childNodes.forEach(el => {
           el.removeEventListener('click', handleChildrenClicks);
         })

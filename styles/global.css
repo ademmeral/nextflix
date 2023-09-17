@@ -9,7 +9,7 @@
   @apply flex flex-col gap-[1rem] items-center
 }
 .overlay{
-  @apply w-full min-h-[100vh] absolute top-0 left-0 bg-gradient-to-b from-transparent to-60% to-slate-900
+  @apply w-full min-h-[100vh] absolute top-0 left-0 bg-gradient-to-b from-slate-900/30 to-60% to-slate-900
 }
 .hide-scroll{
   scrollbar-width: 0;

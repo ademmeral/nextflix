@@ -8,6 +8,7 @@
 }
 .genres{
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 .dragging{
   scroll-behavior: smooth;
