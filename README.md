@@ -8,8 +8,6 @@
   + Paxios Client (Homemade Axios -LOL-)
   + Skeletons and Loading Spinners (All are homemade)
 
-[Watch on Youtube](https://youtu.be/ziiJ1TxIi-0)
-
 Since the app requires an access token to TMDB Movie API, I didnt deploy it.
 If you wanna test it in you local environment ;
 * ## Construction
@@ -22,3 +20,4 @@ If you wanna test it in you local environment ;
   7. Lastly, go to <code>localhost:3000</code> 
   
 You can build it if you like. That's up to you.
+
