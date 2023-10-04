@@ -6,7 +6,6 @@ type ReactSlider = {
 }
 
 export function useSlider(obj: ReactSlider) {
-  let { current: isDragging } = useRef(false);
   let { current: timeout } = useRef(0)
 
   if (!(obj.parent || obj.arrows || obj))
@@ -14,20 +13,15 @@ export function useSlider(obj: ReactSlider) {
 
   useEffect(() => {
     const containers = document.querySelectorAll('.rsl__container') as NodeListOf<HTMLElement>
-    let handleChildrenClicks: EventListenerOrEventListenerObject;
-    let handleMouseDown: (e?: PointerEvent) => void;
-    let handleMouseUp: (e?: PointerEvent) => void;
-    let handleMouseLeave: (e?: PointerEvent) => void;
-    let dragging: (e: PointerEvent) => void;
-    let handleScroll: (this: HTMLUListElement, ev?: Event) => any;
-    let handleArrowsClick: (e: Event) => void;
-
+    const parEvs:[string, EventListener | ((e:PointerEvent) => void) ][] = []
+    const arrEvs:[string, EventListener][] = []
 
     containers.forEach(c => {
-
+      let isDragging = false;
       // Getting elements with the given class names
       const parent = c.querySelector<HTMLUListElement>(obj.parent) as HTMLUListElement;
       const arrows = c.querySelectorAll<HTMLElement>(obj.arrows);
+      const [parLeft, parRight] = [arrows[0].parentElement, arrows[1].parentElement]
       // handleIcons(); // Checking scrollX. If it's greater than max hide or else do nothing;
       // Checking if the elements have been found, otherwise throw an Error
       if (!(parent || arrows.length))
@@ -38,21 +32,26 @@ export function useSlider(obj: ReactSlider) {
       if (!arrows[1].classList.contains('right'))
         arrows[1].classList.add('right');
 
-      handleChildrenClicks = (e: Event) => { e.preventDefault() };
-      handleMouseDown = () => { isDragging = true }
-      handleMouseUp = () => { isDragging = false };
-      handleMouseLeave = () => { isDragging = false };
+      const handleChildrenClicks = (e: Event) => { e.preventDefault() };
+      const handleMouseDown = () => { isDragging = true }
+      const handleMouseUp = () => { isDragging = false };
+      const handleMouseLeave = () => { isDragging = false };
+      parEvs.push(
+        ['pointerdown', handleMouseDown], 
+        ['pointerup', handleMouseUp], 
+        ['pointerleave',handleMouseLeave]
+      )
 
       // Handling visiblity of Arrows
       const handleIcons = () => {
         const x = Math.round(parent.scrollLeft)
         const xMax = parent.scrollWidth - parent.clientWidth;
-        x > 0
-          ? arrows[0].classList.remove('rsl__hide')
-          : arrows[0].classList.add('rsl__hide');
+        x > 1
+          ? parLeft?.classList.remove('rsl__hide')
+          : parLeft?.classList.add('rsl__hide');
         xMax > x + 1
-          ? arrows[1].classList.remove('rsl__hide')
-          : arrows[1].classList.add('rsl__hide');
+          ? parRight?.classList.remove('rsl__hide')
+          : parRight?.classList.add('rsl__hide');
       } // handleIcons
 
       const handleArrowsClick = (e: Event) => {
@@ -67,9 +66,9 @@ export function useSlider(obj: ReactSlider) {
 
       // Handling draggability of UL Element
       // Prevents clicking by mistake
-      dragging = (e: PointerEvent) => {
+      const dragging = (e: PointerEvent) => {
         e.preventDefault();
-        e.stopPropagation();
+        // e.stopPropagation();
 
         if (!isDragging) {
           parent.childNodes.forEach(el => {
@@ -78,16 +77,19 @@ export function useSlider(obj: ReactSlider) {
           parent.classList.remove('dragging')
           return;
         }
+        // if (!isDragging) return;
           parent.childNodes.forEach(el => {
             el.addEventListener('click', handleChildrenClicks);
           })
           parent.classList.add('dragging')
-          parent.scrollLeft -= e.movementX;
+          parent.scrollLeft -= e.movementX/3;
 
       };
-
-      handleScroll = () => { handleIcons() }
-
+      const handleScroll = () => { handleIcons() }
+      parEvs.push(
+        ['pointermove', dragging], 
+        ['scroll', handleScroll]
+      );
       parent.addEventListener('pointerdown', handleMouseDown);
       parent.addEventListener('pointermove', dragging);
       parent.addEventListener('pointerleave', handleMouseLeave);
@@ -97,28 +99,28 @@ export function useSlider(obj: ReactSlider) {
       // Adding EventListener to Arrows
       arrows.forEach(ar => ar.addEventListener('click', handleArrowsClick) // addEvListener for Arrows
       ); // forEach
-
+      arrEvs.push( ['click', handleArrowsClick] )
 
     })
 
 
     // Cleanings when component is unmounted
     return () => {
-        const parents = document.querySelectorAll('.rsl__container_list') as NodeListOf<HTMLUListElement>
+      const parents = document.querySelectorAll('.rsl__container_list') as NodeListOf<HTMLUListElement>
       if (parents.length) {
 
         parents.forEach(p => {
-          p.removeEventListener('pointerdown', handleMouseDown)
-          p.removeEventListener('pointerup', handleMouseUp);
-          p.removeEventListener('pointermove', dragging);
-          p.removeEventListener('pointerleave', handleMouseLeave);
-          p.removeEventListener('scroll', handleScroll);
+          parEvs.forEach(ev => {
+            p.removeEventListener(ev[0] as string, ev[1] as EventListener)
+          })
           const arrows = p.querySelectorAll('.rsl__container__shadow__arrow') as NodeListOf<HTMLElement>
           arrows.forEach(a => {
-            a.removeEventListener('click', handleArrowsClick)
-          })
-        });
-      };
+            arrEvs.forEach(e => {
+              a.removeEventListener(e[0], e[1])
+            }) // arrEvs forEach
+          }) // arrows forEach
+        }); // parents forEach
+      }; // if stt
       if (timeout) clearTimeout(timeout);
     }; // end of the function
 

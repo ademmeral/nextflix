@@ -14,7 +14,7 @@ type ReactSliderPropsType = {
 function ReactSlider({children, left,right, _class, id}: ReactSliderPropsType) {
   useSlider({
     parent : '.rsl__container__list',
-    arrows : '.rsl__container__shadow'
+    arrows : '.rsl__container__shadow__arrow'
   })
   return (
     <div className={`rsl__container ${_class}`} id={id}>

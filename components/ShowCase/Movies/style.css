@@ -6,7 +6,7 @@
   @apply text-3xl font-semibold mb-5 border-b border-white/20 pb-2
 }
 
-#movies .movie{
+.movie{
   @apply min-w-[250px]
 }
 /* .movie a img{
