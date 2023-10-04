@@ -2,10 +2,7 @@ import Footer from "@/components/Footer/Footer"
 import Header from "@/components/Header/Header"
 import {Barlow} from 'next/font/google';
 import Head from "./head";
-
-import '@/styles/reset.css';
-import '@/styles/global.css';
-import CurrentGenreProvider from "@/contexts/CurrentGenre";
+import './global.css';
 
 const barlow = Barlow({
   weight: ['300','400','500','600','700'], 

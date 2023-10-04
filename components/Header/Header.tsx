@@ -8,7 +8,7 @@ function Header() {
       <nav className={'nav fluid'}>
         <figure className={'logo-wrapper'}>
           <AiFillPlayCircle  size={35}/>
-          <h3 className='pt-1'>
+          <h3>
             <Link href={'/'}>NEXTFLIX</Link>
           </h3>
         </figure>

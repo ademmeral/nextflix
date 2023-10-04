@@ -1,4 +1,6 @@
 import Movie from "./Movie";
+import ReactSlider from "@/components/ReactSlider/ReactSlider";
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 import './style.css';
 
 type MoviesType = {
@@ -13,9 +15,18 @@ function Movies({movies, title, type}: MoviesType) {
     <div className="categories">
       <div className="category">
         <h3>{title}</h3>
-        <ul className="movies">
-          {movies.map((movie) => <Movie movie={movie} type={type}/>)}
-        </ul>
+        <ReactSlider 
+          left={<FaAngleLeft size={30}/>}
+          right={<FaAngleRight size={30}/>}
+          id="movies"
+        >
+          {movies.map((movie,i) => <Movie
+              key={i + 741236987}
+              movie={movie}
+              type={type} 
+            />
+          )}
+        </ReactSlider>
       </div>
     </div>
   )

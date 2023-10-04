@@ -1,21 +1,16 @@
 
 /* ========== GENRES ========== */
-.genres-stripe-wrapper{
-  @apply w-full flex relative overflow-x-hidden rounded-md
-}
-.genres{
-  @apply flex gap-[1rem] max-w-full overflow-x-scroll bg-slate-900/60 p-[.5rem]
-}
-.genres{
-  scroll-behavior: smooth;
-  box-sizing: border-box;
-}
-.dragging{
-  scroll-behavior: smooth;
-  cursor: grab;
+@media screen and (max-width: 640px) {
+  .rsl__container__shadow{
+    @apply w-max px-4
+  }
+  .rsl__container__shadow button{
+    @apply w-[40px] h-[40px]
+  }
 }
 .genre button a{
-  @apply flex items-center px-10 h-[60px] bg-slate-900 text-white font-medium border-[1px] border-slate-200/30 rounded-md whitespace-nowrap
+  @apply flex items-center px-6 h-[40px] md:px-10 md:h-[60px] bg-black/90 text-white font-medium;
+  @apply border-[1px] border-slate-200/30 rounded-md whitespace-nowrap
 }
 .genres-stripe-wrapper .shadow{
   @apply w-[80px] h-full flex items-center justify-center absolute top-0 z-10 rounded-md from-slate-900 from-90% to-transparent text-slate-200/80 transition-[width] duration-200 overflow-hidden
@@ -29,7 +24,6 @@
 .genres-stripe-wrapper .right{
   @apply right-0 bg-gradient-to-l
 }
-
 /*================ SKELETON ================= */
 .skeleton .shadow{
   display: none;

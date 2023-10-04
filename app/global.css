@@ -11,12 +11,7 @@
 .overlay{
   @apply w-full min-h-[100vh] absolute top-0 left-0 bg-gradient-to-b from-slate-900/30 to-60% to-slate-900
 }
-.hide-scroll{
-  scrollbar-width: 0;
-}
-.hide-scroll::-webkit-scrollbar{
-  display: none;
-}
+
 .loader,
 .error,
 .not-found{
@@ -35,10 +30,8 @@ body:has(.loader, .error, .not-found){
   @apply absolute top-0 left-0 bg-gradient-to-b from-transparent to-slate-900
 }
 .btn{
-  @apply py-1 px-20 bg-white text-slate-900 text-xl font-semibold rounded-full
-}
-.hide{
-  width: 0 !important;
+  @apply h-[40px] md:h-[50px] self-center px-10 text-lg md:px-20 md:text-xl bg-white;
+  @apply text-slate-900 font-semibold rounded-xl
 }
 a{
   display: block;
@@ -47,10 +40,6 @@ a{
 }
 a.go-home{
   @apply text-white/50 underline underline-offset-4 text-center
-}
-/*====== ANIMATION FOR SHADOWS ====== */
-@keyframes slide {
-  
 }
 /*====== SPINNER ====== */
 .spinner{

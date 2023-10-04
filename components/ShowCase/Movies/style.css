@@ -5,17 +5,13 @@
 .category h3{
   @apply text-3xl font-semibold mb-5 border-b border-white/20 pb-2
 }
-.movies {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: .5rem;
+
+#movies .movie{
+  @apply min-w-[250px]
 }
-.movie a{
-  @apply overflow-hidden
-}
-.movie a img{
+/* .movie a img{
   @apply hover:scale-110 ease-in duration-200
-}
+} */
 .load-btn{
   @apply py-2 px-16 bg-slate-900 self-center border border-white/50 rounded-md
 }

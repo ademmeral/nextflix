@@ -11,13 +11,13 @@
   @apply flex flex-col gap-[.5rem]
 }
 .featured-movie-wrapper article h2{
-  @apply text-5xl font-bold
+  @apply text-4xl font-bold md:text-5xl
 }
 .featured-movie-wrapper article :where(h2,p){
-  @apply max-w-[70%]
+  @apply md:max-w-[70%]
 }
 .featured-movie-wrapper article p {
-  @apply text-xl font-medium
+  @apply md:text-xl font-medium
 }
 .featured-movie-wrapper figure{
   @apply -z-20 w-full min-h-[100vh] fixed top-0 left-0 bg-no-repeat bg-cover bg-center

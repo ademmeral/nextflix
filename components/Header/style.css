@@ -9,5 +9,5 @@
   @apply flex gap-[.5rem] items-center
 }
 .links{
-  @apply flex gap-[1rem] items-center text-xl
+  @apply hidden md:flex gap-[1rem] items-center text-xl
 }
