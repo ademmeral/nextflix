@@ -21,3 +21,8 @@ If you wanna test it in you local environment ;
   
 You can build it if you like. That's up to you.
 
+### VIDEO
+
+https://github.com/ademmeral/nextflix/assets/107725052/eb357987-0b89-4bb0-bf2e-0ad30b714a68
+
+
