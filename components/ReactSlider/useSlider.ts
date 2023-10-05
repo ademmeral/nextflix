@@ -85,7 +85,6 @@ export function useSlider(obj: ReactSlider, ref: React.MutableRefObject<HTMLElem
       }
 
       // Handling draggability of UL Element
-      // Prevents clicking by mistake
       const dragging = (e: PointerEvent) => {
         e.preventDefault();
         if (!isDragging) {
@@ -130,12 +129,6 @@ export function useSlider(obj: ReactSlider, ref: React.MutableRefObject<HTMLElem
               a.removeEventListener(e[0], e[1])
             }) // arrows events forEach
           }) // arrows forEach
-          const children = Array.from(p.children) as HTMLElement[];
-          children.forEach(c => {
-            chEvs.forEach(eve => {
-              c.removeEventListener(eve[0], eve[1])
-            }) // children events
-          }) // children
         }); // parents forEach
       }; // if stt
       if (timeout) clearTimeout(timeout);
