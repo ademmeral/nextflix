@@ -38,6 +38,7 @@ a{
   width: 100%;
   height: 100%;
 }
+
 a.go-home{
   @apply text-white/50 underline underline-offset-4 text-center
 }

@@ -21,6 +21,10 @@
   scroll-behavior: auto !important;
   cursor: grab;
 }
+.rsl__container__list.dragging :is(a, button){
+  pointer-events: none !important;
+}
+
 .rsl__container__list::-webkit-scrollbar{
   display: none;
 }

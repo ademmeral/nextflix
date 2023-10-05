@@ -9,13 +9,13 @@
   @apply flex flex-col gap-[1rem]
 }
 .single-movie article h2{
-  @apply text-5xl font-bold
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold
 }
 .single-movie article :where(h2,p){
-  @apply max-w-[70%]
+  @apply lg:max-w-[70%]
 }
 .single-movie article p {
-  @apply text-xl font-medium
+  @apply lg:text-xl font-medium
 }
 .single-movie figure{
   @apply -z-20 w-full h-full fixed top-0 left-0 bg-no-repeat bg-cover bg-center
@@ -24,8 +24,8 @@
   @apply hidden
 }
 .single-movie .buttons{
-  @apply flex gap-[.5rem] max-h-full mt-[1rem]
+  @apply flex gap-[.5rem] mt-[1rem]
 }
 .single-movie .btn{
-  @apply py-3 px-20 bg-white text-slate-900 text-xl font-semibold rounded-full
+  @apply flex items-center py-3 px-16 lg:px-20 bg-white text-slate-900 text-xl font-semibold rounded-full
 }

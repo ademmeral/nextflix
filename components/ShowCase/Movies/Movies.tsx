@@ -19,16 +19,13 @@ function Movies({movies, title, type}: MoviesType) {
           left={<FaAngleLeft size={30}/>}
           right={<FaAngleRight size={30}/>}
           id="movies"
-          _class="movies_section"
         >
-
         {movies.map((movie,i) => <Movie
               key={i + 741236987}
               movie={movie}
               type={type} 
             />
           )}
-
         </ReactSlider>
       </div>
     </div>

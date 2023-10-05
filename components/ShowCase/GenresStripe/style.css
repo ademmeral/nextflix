@@ -9,8 +9,8 @@
   }
 }
 .genre button a{
-  @apply flex items-center px-6 h-[40px] md:px-10 md:h-[60px] bg-black/90 text-white font-medium;
-  @apply border-[1px] border-slate-200/30 rounded-md whitespace-nowrap
+  @apply flex items-center px-6 h-[40px] md:px-8 lg:px-10 md:h-[50px] lg:h-[60px] border-[1px] border-slate-200/30;
+  @apply rounded-md whitespace-nowrap bg-black/90 text-sm md:text-base text-white font-medium;
 }
 .genres-stripe-wrapper .shadow{
   @apply w-[80px] h-full flex items-center justify-center absolute top-0 z-10 rounded-md from-slate-900 from-90% to-transparent text-slate-200/80 transition-[width] duration-200 overflow-hidden

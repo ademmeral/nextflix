@@ -1,5 +1,7 @@
 'use client';
+
 import { useSlider } from "./useSlider"
+import { useRef } from "react";
 import './rsl.css';
 
 type ReactSliderPropsType = {
@@ -8,16 +10,17 @@ type ReactSliderPropsType = {
   right? : React.ReactNode,
   _class? : string,
   id? : string,
-  style? : Record<string, any>
 }
 
 function ReactSlider({children, left,right, _class, id}: ReactSliderPropsType) {
+  const ref = useRef(null)
   useSlider({
     parent : '.rsl__container__list',
     arrows : '.rsl__container__shadow__arrow'
-  })
+  }, ref)
+
   return (
-    <div className={`rsl__container ${_class}`} id={id}>
+    <div className={`rsl__container ${_class}`} id={id} ref={ref} key={crypto.randomUUID()}>
       <div className="rsl__container__shadow rsl__hide">
         <button type="button" className="rsl__container__shadow__arrow">
           {left}

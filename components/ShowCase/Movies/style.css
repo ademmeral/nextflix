@@ -7,7 +7,7 @@
 }
 
 .movie{
-  @apply min-w-[250px]
+  @apply  min-w-full md:min-w-[200px] lg:min-w-[250px]
 }
 /* .movie a img{
   @apply hover:scale-110 ease-in duration-200

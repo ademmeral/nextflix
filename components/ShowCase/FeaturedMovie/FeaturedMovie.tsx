@@ -18,7 +18,7 @@ function FeaturedMovie({movie}:Props) {
         <img src='' alt={movie.original_title} />
       </figure>
       <article>
-        <h2>{movie.original_title}</h2>
+        <h2>{movie.original_title || movie.name}</h2>
         <p>{compact(movie.overview, 200)}</p>
       </article>
       <div className="buttons">

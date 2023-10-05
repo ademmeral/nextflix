@@ -16,6 +16,7 @@ async function ShowCase({params : {names}}:Props) {
     {results: byCategory}, {genres}
   ] = await Promise.all([getMany(byCtg),getMany(gnrs)])
   if (!byCategory) notFound();
+
   return (
     <div className='fluid showcase'>
       <FeaturedMovie movie={byCategory[0]}/>
