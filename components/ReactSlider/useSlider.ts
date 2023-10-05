@@ -15,21 +15,6 @@ export function useSlider(obj: ReactSlider, ref: React.MutableRefObject<HTMLElem
     // const containers = document.querySelectorAll('.rsl__container') as NodeListOf<HTMLElement>
     const parEvs: [string, EventListener | ((e: PointerEvent) => void)][] = []
     const arrEvs: [string, EventListener][] = []
-    const chEvs: [string, EventListener][] = []
-
-    function recursive(parents: HTMLElement[], callback?: (ch: HTMLElement) => void) {
-
-      const children:any = []
-      for (const par of parents) {
-        if (!par.children.length) return;
-        children.concat(Array.from(par.children))
-        for (const ch of children) {
-          if (callback) callback(ch);
-          return;
-        }
-      }
-      recursive(children);
-    }
 
     if (ref && ref.current) {
       let isDragging = false;
@@ -49,7 +34,6 @@ export function useSlider(obj: ReactSlider, ref: React.MutableRefObject<HTMLElem
       if (!arrows[1].classList.contains('right'))
         arrows[1].classList.add('right');
 
-      const handleChildrenClicks = (e: Event) => { e.preventDefault() };
       const handleMouseDown = () => { isDragging = true }
       const handleMouseUp = () => { isDragging = false };
       const handleMouseLeave = () => { isDragging = false };
@@ -57,9 +41,6 @@ export function useSlider(obj: ReactSlider, ref: React.MutableRefObject<HTMLElem
         ['pointerdown', handleMouseDown],
         ['pointerup', handleMouseUp],
         ['pointerleave', handleMouseLeave]
-      );
-      chEvs.push(
-        ['click', handleChildrenClicks]
       );
 
       // Handling visiblity of Arrows
@@ -120,15 +101,9 @@ export function useSlider(obj: ReactSlider, ref: React.MutableRefObject<HTMLElem
       if (parents.length) {
 
         parents.forEach(p => {
-          parEvs.forEach(ev => {
-            p.removeEventListener(ev[0] as string, ev[1] as EventListener)
-          }) // parent Events
+          parEvs.forEach(ev => { p.removeEventListener(ev[0] as string, ev[1] as EventListener) });
           const arrows = p.querySelectorAll('.rsl__container__shadow__arrow') as NodeListOf<HTMLElement>
-          arrows.forEach(a => {
-            arrEvs.forEach(e => {
-              a.removeEventListener(e[0], e[1])
-            }) // arrows events forEach
-          }) // arrows forEach
+          arrows.forEach(a => { arrEvs.forEach( e => { a.removeEventListener(e[0], e[1]) }) });
         }); // parents forEach
       }; // if stt
       if (timeout) clearTimeout(timeout);
