@@ -18,11 +18,3 @@ If you wanna test it in you local environment ;
   5. Create a <code>.env</code> file then put your access token in
   6. <code>npm run dev</code> Because I didnt build the app. 
   7. Lastly, go to <code>localhost:3000</code> 
-  
-You can build it if you like. That's up to you.
-
-### VIDEO
-
-https://github.com/ademmeral/nextflix/assets/107725052/eb357987-0b89-4bb0-bf2e-0ad30b714a68
-
-
