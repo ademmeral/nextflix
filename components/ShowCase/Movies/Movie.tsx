@@ -10,7 +10,7 @@ function Movie({movie, type}: MovieType){
   
   const src = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`;
   const href = {
-    pathname : `/${type}/movie`,
+    pathname : `/${type}/${type?.slice(0,-1)}`,
     query : {
       id : movie.id
     }

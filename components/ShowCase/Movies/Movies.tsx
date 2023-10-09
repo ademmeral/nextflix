@@ -14,7 +14,7 @@ function Movies({movies, title, type}: MoviesType) {
   return (
     <div className={`${s.categories}`}>
       <div className={`${s.category}`}>
-        <h3>{title.toUpperCase()}</h3>
+        <h3>{title?.toUpperCase()}</h3>
         <ReactSlider 
           left={<FaAngleLeft size={30}/>}
           right={<FaAngleRight size={30}/>}

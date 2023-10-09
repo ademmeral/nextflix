@@ -1,3 +1,4 @@
+import InfoButton from '@/components/InfoButton/InfoButton';
 import FeaturedMovie from '@/components/ShowCase/FeaturedMovie/FeaturedMovie'
 import GenresStripe from '@/components/ShowCase/GenresStripe/GenresStripe';
 import Movies from '@/components/ShowCase/Movies/Movies';
@@ -5,12 +6,12 @@ import { getMany } from '@/utils/utils';
 import { notFound } from 'next/navigation';
 
 type Props = {
-  searchParams : {names : string[]}
+  searchParams : {category : string}
 }
 
-async function ShowCase({searchParams : {names}}:Props) {
+async function ShowCase({searchParams : {category}}:Props) {
   // POPULAR & TOP-RATED MOVIES & GENRES
-  const byCtg = `discover/tv?language=en-US&page=1&with_genres=${names[1]}`
+  const byCtg = `discover/tv?language=en-US&page=1&with_genres=${category}`
   const gnrs = 'genre/tv/list?language=en'
   const [
     {results: byCategory}, {genres}
@@ -20,9 +21,11 @@ async function ShowCase({searchParams : {names}}:Props) {
 
   return (
     <div className='fluid showcase'>
-      <FeaturedMovie movie={byCategory[0]}/>
+      <FeaturedMovie item={byCategory[0]}>
+        <InfoButton type="series" item={byCategory[0]} />
+      </FeaturedMovie>
       <GenresStripe genres={genres} type='series'/>
-      <Movies movies={byCategory} title={names[0].toUpperCase()} type='series'/>
+      <Movies movies={byCategory} title={category} type='series'/>
     </div>
   )
 }

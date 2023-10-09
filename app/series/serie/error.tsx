@@ -2,8 +2,11 @@
 
 import NotFound from "@/components/NotFound/NotFound"
 
-function ErrprPage() {
-  return <NotFound title="404, Not Found" link="Go home"/>
+function ErrorPage() {
+  return <NotFound 
+    title="An error has occured. We are sorry for that!" 
+    link="Go home" 
+  />
 }
 
-export default ErrprPage
+export default ErrorPage

@@ -1,10 +1,11 @@
 .loader {
-    @apply h-full grid place-items-center text-white justify-end gap-[1.5rem] pb-10;
-    @apply h-[300px] justify-center;
+    @apply h-full grid place-items-center text-white gap-[1.5rem];
 }
 
 /*====== SPINNER ====== */
 .spinner {
+    width: 100px;
+    height: 100px;
     position: relative;
 }
 

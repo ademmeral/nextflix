@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en" className={barlow.className}>
       <Head />
       <body>
-        <div className="overlay">
+        <div className="overlay grid grid-rows-layout">
           <Header />
           <main>{children}</main>
           <Footer />

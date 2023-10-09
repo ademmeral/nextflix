@@ -9,7 +9,7 @@ function Header() {
         <figure className={`${s.logo}`}>
           <AiFillPlayCircle  size={35}/>
           <h3>
-            <Link href={'/'}>NEXTFLIX</Link>
+            <Link href={'/home'}>NEXTFLIX</Link>
           </h3>
         </figure>
         <ul className={`${s.links}`}>

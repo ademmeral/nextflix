@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
+    './*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -18,6 +19,9 @@ const config: Config = {
       },
       minHeight : {
         "calc" : "calc(100vh - 60px - 90px)"
+      },
+      gridTemplateRows : {
+        'layout' : '60px 1fr 90px'
       }
     },
   },

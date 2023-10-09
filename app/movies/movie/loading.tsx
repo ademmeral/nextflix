@@ -1,7 +1,7 @@
-import Loading from "@/components/Loading";
+import ReactLoader from "@/components/ReactLoader/ReactLoader";
 
 function MovieLoading() {
-  return <Loading />
+  return <ReactLoader />
 }
 
 export default MovieLoading
