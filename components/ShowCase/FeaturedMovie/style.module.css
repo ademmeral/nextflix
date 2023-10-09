@@ -1,0 +1,27 @@
+
+/* ========== FEATURED MOVIE ========== */
+.wrapper{
+  @apply min-h-[400px] flex flex-col text-white justify-end gap-[1.5rem] pb-10
+}
+
+.article{
+  @apply flex flex-col gap-[.5rem]
+}
+.article h2{
+  @apply text-4xl font-bold md:text-5xl
+}
+.article :where(h2,p){
+  @apply md:max-w-[70%]
+}
+.article p {
+  @apply md:text-xl font-medium
+}
+.figure{
+  @apply -z-20 w-full h-full aspect-video fixed inset-0 bg-no-repeat bg-cover bg-center
+}
+.figure img{
+  @apply hidden
+}
+.buttons{
+  @apply flex items-center gap-[1.5rem] max-h-full
+}

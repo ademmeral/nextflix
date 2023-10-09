@@ -1,0 +1,36 @@
+.loader {
+    @apply h-full grid place-items-center text-white justify-end gap-[1.5rem] pb-10;
+    @apply h-[300px] justify-center;
+}
+
+/*====== SPINNER ====== */
+.spinner {
+    position: relative;
+}
+
+.spinner::after {
+    content: '';
+
+    display: block;
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    inset: 0;
+
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-top-color: #fff;
+    border-radius: 50%;
+
+    animation: spin 1s infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,13 @@
+.header{
+  @apply sticky top-0 left-0 z-10 bg-gradient-to-b from-slate-900 via-slate-900/90 to-transparent text-white
+}
+.nav{
+  @apply h-[60px] flex justify-between items-center text-2xl
+}
+
+.logo{
+  @apply flex gap-[.5rem] items-center
+}
+.links{
+  @apply hidden md:flex gap-[1rem] items-center text-xl
+}

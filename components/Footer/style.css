@@ -1,6 +1,0 @@
-.footer{
-  @apply w-full h-[90px] text-white pt-10 pb-2
-}
-.footer .fluid p{
-  @apply flex justify-center items-center border-t border-white/20 pt-4
-}

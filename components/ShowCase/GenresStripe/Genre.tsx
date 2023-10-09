@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link"
+import s from './style.module.css';
 
 type Props = {
   gen : {id:number, name: string},
@@ -8,17 +9,17 @@ type Props = {
 }
 function Genre({gen, type}:Props){
 
-  const path = type === 'movies'
-    ? `/movies/category/${gen.name.toLowerCase()}/${gen.id}`
-    : `/series/category/${gen.name.toLowerCase()}/${gen.id}`;
+  const href = {
+    pathname : `/${type}`,
+    query : {
+      category : `${gen.name.toLowerCase()}`
+    }
+  };
     
   return (
-    <li key={gen.id} className="genre">
+    <li key={gen.id} className={`${s.genre}`}>
       <button type="button">
-        <Link 
-          href={path}
-        >{gen.name}
-        </Link>
+        <Link href={href}>{gen.name}</Link>
       </button>
     </li>
   )

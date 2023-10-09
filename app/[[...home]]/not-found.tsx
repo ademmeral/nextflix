@@ -1,16 +1,7 @@
-import Link from "next/link"
+import NotFound from "@/components/NotFound/NotFound"
 
-function NotFound() {
-  return (
-    <div className="fluid not-found">
-      <article>
-        <h3>404, Not Found</h3>
-        <Link href={'/'} className="go-home">
-          <small>Go home</small>
-        </Link>
-      </article>
-    </div>
-  )
+function NotFoundPage({title, link} : Record<string, any>) {
+  return <NotFound title="404, Page not found!" link="Go home"/>
 }
 
-export default NotFound
+export default NotFoundPage

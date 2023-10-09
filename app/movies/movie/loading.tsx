@@ -1,7 +1,7 @@
 import Loading from "@/components/Loading";
 
-function HomeLoading() {
+function MovieLoading() {
   return <Loading />
 }
 
-export default HomeLoading
+export default MovieLoading

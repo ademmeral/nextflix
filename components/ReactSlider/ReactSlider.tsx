@@ -25,7 +25,6 @@ function ReactSlider({children, left,right, _class, id}: ReactSliderPropsType) {
         <button type="button" className="rsl__container__shadow__arrow">
           {left}
         </button>
-
       </div>
       <div className="rsl__container__shadow">
         <button type="button" className="rsl__container__shadow__arrow">

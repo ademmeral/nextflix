@@ -1,7 +1,7 @@
 import Movie from "./Movie";
 import ReactSlider from "@/components/ReactSlider/ReactSlider";
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
-import './style.css';
+import s from './style.module.css';
 
 type MoviesType = {
   movies : Record<string, any>[],
@@ -12,9 +12,9 @@ type MoviesType = {
 function Movies({movies, title, type}: MoviesType) {
 
   return (
-    <div className="categories">
-      <div className="category">
-        <h3>{title}</h3>
+    <div className={`${s.categories}`}>
+      <div className={`${s.category}`}>
+        <h3>{title.toUpperCase()}</h3>
         <ReactSlider 
           left={<FaAngleLeft size={30}/>}
           right={<FaAngleRight size={30}/>}

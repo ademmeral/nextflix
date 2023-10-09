@@ -1,18 +1,18 @@
 import Link from 'next/link';
-import {AiFillPlayCircle} from 'react-icons/ai';
-import './style.css';
+import { AiFillPlayCircle } from 'react-icons/ai';
+import s from './style.module.css';
 
 function Header() {
   return (
-    <header className='header'>
-      <nav className={'nav fluid'}>
-        <figure className={'logo-wrapper'}>
+    <header className={s.header}>
+      <nav className={`${s.nav} fluid`}>
+        <figure className={`${s.logo}`}>
           <AiFillPlayCircle  size={35}/>
           <h3>
             <Link href={'/'}>NEXTFLIX</Link>
           </h3>
         </figure>
-        <ul className={'links'}>
+        <ul className={`${s.links}`}>
           <li>
             <Link href={'/movies'}>Movies</Link>
           </li>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .fluid{
-  @apply max-w-1280 mx-auto my-0 px-[1rem]
+  @apply max-w-fluid mx-auto my-0 px-[1rem]
 }
 .fluid:has(.error, .not-found) article{
   @apply flex flex-col gap-[1rem] items-center
@@ -11,11 +11,13 @@
 .overlay{
   @apply w-full min-h-[100vh] absolute top-0 left-0 bg-gradient-to-b from-slate-900/30 to-60% to-slate-900
 }
-
+main{
+  @apply min-h-calc
+}
 .loader,
 .error,
 .not-found{
-  @apply h-calc flex justify-center items-center
+  @apply min-h-calc flex justify-center items-center
 }
 :is(.loader, .error, .not-found) h3{
   @apply text-white text-3xl
@@ -30,8 +32,12 @@ body:has(.loader, .error, .not-found){
   @apply absolute top-0 left-0 bg-gradient-to-b from-transparent to-slate-900
 }
 .btn{
-  @apply h-[40px] md:h-[50px] self-center px-10 text-lg md:px-20 md:text-xl bg-white;
+  @apply h-[40px] md:h-[50px] px-10 text-lg md:px-20 md:text-xl bg-white;
   @apply text-slate-900 font-semibold rounded-xl
+}
+.info{
+  @apply flex items-center justify-center bg-gray-600 text-white rounded-full;
+  @apply w-[40px] md:w-[50px] h-[40px] md:h-[50px] 
 }
 a{
   display: block;
@@ -41,33 +47,4 @@ a{
 
 a.go-home{
   @apply text-white/50 underline underline-offset-4 text-center
-}
-/*====== SPINNER ====== */
-.spinner{
-  position: relative;
-}
-.spinner::after{
-  content: '';
-
-  display: block;
-  width: 100px;
-  height: 100px;
-
-  position: absolute;
-  inset: 0;
-
-  border: 3px solid rgba(255, 255, 255, .3);
-  border-top-color: #fff;
-  border-radius: 50%;
-
-  animation: spin 1s infinite;
-}
-
-@keyframes spin {
-  0%{
-    transform: rotate(0deg);
-  }
-  100%{
-    transform: rotate(360deg);
-  }
 }
