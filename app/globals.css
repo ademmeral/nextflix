@@ -9,10 +9,10 @@
   @apply flex flex-col gap-[1rem] items-center
 }
 .overlay{
-  @apply w-full min-h-[100vh] absolute top-0 left-0 bg-gradient-to-b from-slate-900/30 to-60% to-slate-900
+  @apply w-full h-full absolute inset-0 -z-10 bg-gradient-to-b from-slate-900/30 to-60% to-slate-900
 }
 main{
-  @apply h-full w-full
+  @apply w-full min-h-calc
 }
 .loader,
 .error,

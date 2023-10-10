@@ -1,7 +1,7 @@
-import Loading from "@/components/Loading";
+import LoadingPage from "@/components/LoadingPage";
 
-function LoadingPage() {
-  return <Loading />
+function SeriesLoadingPage() {
+  return <LoadingPage />
 }
 
-export default LoadingPage
+export default SeriesLoadingPage

@@ -1,7 +1,7 @@
 import ReactLoader from "./ReactLoader/ReactLoader"
 import ReactSkeleton from "./ReactSkeleton/ReactSkeleton"
 
-function Loading() {
+function LoadingPage() {
   return (
     <div className="fluid showcase">
       <div className="w-full h-full absolute inset-0 bg-slate-900 -z-10"></div>
@@ -15,4 +15,4 @@ function Loading() {
   )
 }
 
-export default Loading
+export default LoadingPage

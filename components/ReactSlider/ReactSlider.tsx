@@ -12,7 +12,7 @@ type ReactSliderPropsType = {
   id? : string,
 }
 
-function ReactSlider({children, left,right, _class, id}: ReactSliderPropsType) {
+function ReactSlider({children, left, right, _class, id}: ReactSliderPropsType) {
   const ref = useRef(null)
   useSlider({
     parent : '.rsl__container__list',
@@ -20,7 +20,7 @@ function ReactSlider({children, left,right, _class, id}: ReactSliderPropsType) {
   }, ref)
 
   return (
-    <div className={`rsl__container ${_class}`} id={id} ref={ref} key={crypto.randomUUID()}>
+    <div className={`rsl__container ${_class ? _class : ''}`.trim()} id={id ? id : ''} ref={ref}>
       <div className="rsl__container__shadow rsl__hide">
         <button type="button" className="rsl__container__shadow__arrow">
           {left}
