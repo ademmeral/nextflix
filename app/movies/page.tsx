@@ -1,36 +1,33 @@
 import InfoButton from '@/components/InfoButton/InfoButton';
-import FeaturedMovie from '@/components/ShowCase/FeaturedMovie/FeaturedMovie'
-import GenresStripe from '@/components/ShowCase/GenresStripe/GenresStripe';
-import Movies from '@/components/ShowCase/Movies/Movies';
-import { delay, getMany } from '@/utils/utils';
-import Link from 'next/link';
+import ItemList from '@/components/Cards/ItemList';
+import FeaturedItem from '@/components/FeaturedItem/FeaturedItem';
+import GenreList from '@/components/GenreList/GenreList';
+import { getByCategory } from '@/api/item';
 import { notFound } from 'next/navigation';
-import { FaInfo } from 'react-icons/fa';
+import { getCategories } from '@/api/genres';
+import InitialPage from '@/components/InitialPage';
 
-type Props = {
-  searchParams : {category : string, movie: string}
+type MoviesPagePropsType = {
+  searchParams : {category:string, id: string},
 }
-async function ShowCase({searchParams : {category, movie}}:Props) {
-  // await delay(10000)
+async function MoviesPage({searchParams : {category, id}}:MoviesPagePropsType) {
+  if (!(id||category)) return <InitialPage slug='movie' />;
 
-  // POPULAR & TOP-RATED MOVIES & GENRES
-  const byCtg = `discover/movie?language=en-US&page=1&with_genres=${category}`
-  const gnrs = 'genre/movie/list?language=en'
-  const [
-    {results: byCategory}, {genres}
-  ] = await Promise.all([getMany(byCtg),getMany(gnrs)]);
-
-  if (!(byCategory || genres)) return notFound();
+  const [{results}, {genres}] = await Promise.all([
+    getByCategory('movie', id), getCategories('movie')
+  ]) as Awaited<Promise<[Movies, Categories]>>;
+  
+  if (!(results || genres)) return notFound();
 
   return (
     <div className='fluid showcase'>
-      <FeaturedMovie item={byCategory[0]}>
-        <InfoButton type="movies" item={byCategory[0]} />
-      </FeaturedMovie>
-      <GenresStripe genres={genres} type='movies'/>
-      <Movies movies={byCategory} title={category} type='movies'/>
+      <FeaturedItem item={results[0]} press={true}>
+        <InfoButton type="movies" item={results[0]} />
+      </FeaturedItem>
+      <GenreList genres={genres}/>
+      <ItemList items={results} ctgName={category}/>
     </div>
   )
 }
 
-export default ShowCase
+export default MoviesPage

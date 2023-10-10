@@ -1,13 +1,10 @@
-import FeaturedMovie from '../ShowCase/FeaturedMovie/FeaturedMovie';
+import FeaturedItem from "../FeaturedItem/FeaturedItem"
 
-type PropsType = {
-  singleItem: Record<string, any>
-}
-async function SingleItem({singleItem} : PropsType) {
+async function SingleItem({singleItem} : {singleItem: SingleItemType}) {
 
   return (
     <div className={`fluid`}>
-      <FeaturedMovie item={singleItem}/>
+      <FeaturedItem item={singleItem}/>
     </div>
   )
 }

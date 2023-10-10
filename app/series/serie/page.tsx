@@ -1,11 +1,15 @@
+import { getOne } from "@/api/item";
 import SingleItem from "@/components/SingleItem/SingleItem";
-import { getMany } from "@/utils/utils";
 import { notFound } from "next/navigation";
 
-async function SeriePage({searchParams: {id}} : Record<string, any>) {
-    const getMovie = await getMany(`movie/${id}?language=en-US`) as Awaited<Record<string, any>>
+type SingleSerieProps = {
+    searchParams : {id: string} 
+} 
+async function SingleSeriePage({searchParams: {id}} : SingleSerieProps) {
+    // await delay(10000)
+    const getMovie = await getOne(`tv/${id}`) as Awaited<SingleItemType>
     if (!getMovie) return notFound();
     return <SingleItem singleItem={getMovie}/>
 }
 
-export default SeriePage
+export default SingleSeriePage

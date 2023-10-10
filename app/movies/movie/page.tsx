@@ -1,12 +1,15 @@
 import SingleItem from "@/components/SingleItem/SingleItem";
-import { delay, getMany } from "@/utils/utils";
 import { notFound } from "next/navigation";
+import { getOne } from "@/api/item";
 
-async function MoviePage({searchParams: {id}} : Record<string, any>) {
+type SingleMovieProps = {
+    searchParams : {id: string} 
+} 
+async function SingleMoviePage({searchParams: {id}} : SingleMovieProps) {
     // await delay(10000)
-    const getMovie = await getMany(`movie/${id}?language=en-US`) as Awaited<Record<string, any>>
+    const getMovie = await getOne(`movie/${id}`) as Awaited<SingleItemType>
     if (!getMovie) return notFound();
     return <SingleItem singleItem={getMovie}/>
 }
 
-export default MoviePage
+export default SingleMoviePage

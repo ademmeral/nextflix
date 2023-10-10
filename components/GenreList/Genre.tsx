@@ -1,18 +1,15 @@
 'use client';
-
+import { usePathname } from "next/navigation";
 import Link from "next/link"
 import s from './style.module.css';
 
-type Props = {
-  gen : {id:number, name: string},
-  type:string
-}
-function Genre({gen, type}:Props){
-
+function Genre({gen}:{gen:Category}){
+  const pname = usePathname().includes('series') ? '/series' : '/movies';
   const href = {
-    pathname : `/${type}`,
+    pathname : pname,
     query : {
-      category : `${gen.name.toLowerCase()}`
+      category : `${gen.name.toLowerCase()}`,
+      id : gen.id
     }
   };
     

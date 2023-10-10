@@ -1,33 +1,33 @@
 import InfoButton from '@/components/InfoButton/InfoButton';
-import FeaturedMovie from '@/components/ShowCase/FeaturedMovie/FeaturedMovie'
-import GenresStripe from '@/components/ShowCase/GenresStripe/GenresStripe';
-import Movies from '@/components/ShowCase/Movies/Movies';
-import { getMany } from '@/utils/utils';
+import { getByCategory, getMany } from '@/api/item';
 import { notFound } from 'next/navigation';
+import FeaturedItem from '@/components/FeaturedItem/FeaturedItem';
+import ItemList from '@/components/Cards/ItemList';
+import GenreList from '@/components/GenreList/GenreList';
+import { getCategories } from '@/api/genres';
+import InitialPage from '@/components/InitialPage';
 
-type Props = {
-  searchParams : {category : string}
+type SeriesPagePropsType = {
+  searchParams : {category:string, id: string},
 }
+async function SeriesPage({searchParams : {category, id}}:SeriesPagePropsType) {
+  if (!(id||category)) return <InitialPage slug='tv' />
 
-async function ShowCase({searchParams : {category}}:Props) {
-  // POPULAR & TOP-RATED MOVIES & GENRES
-  const byCtg = `discover/tv?language=en-US&page=1&with_genres=${category}`
-  const gnrs = 'genre/tv/list?language=en'
-  const [
-    {results: byCategory}, {genres}
-  ] = await Promise.all([getMany(byCtg),getMany(gnrs)]);
-  
-  if (!(byCategory||genres)) notFound();
+  const [{results: series}, {genres}] = await Promise.all([
+    getByCategory('tv', id), getCategories('tv')
+  ]) as Awaited<Promise<[Series, Categories]>>;
+
+  if (!(series||genres)) return notFound();
 
   return (
     <div className='fluid showcase'>
-      <FeaturedMovie item={byCategory[0]}>
-        <InfoButton type="series" item={byCategory[0]} />
-      </FeaturedMovie>
-      <GenresStripe genres={genres} type='series'/>
-      <Movies movies={byCategory} title={category} type='series'/>
+      <FeaturedItem item={series[0]} press={true}>
+        <InfoButton type="series" item={series[0]} />
+      </FeaturedItem>
+      <GenreList genres={genres} />
+      <ItemList items={series} ctgName={category} />
     </div>
   )
 }
 
-export default ShowCase
+export default SeriesPage
