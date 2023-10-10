@@ -1,4 +1,4 @@
-import { getOne } from "@/api/item";
+import { getOne } from "@/api/items";
 import SingleItem from "@/components/SingleItem/SingleItem";
 import { notFound } from "next/navigation";
 

@@ -1,5 +1,5 @@
 import InfoButton from '@/components/InfoButton/InfoButton';
-import { getByCategory, getMany } from '@/api/item';
+import { getByCategory, getMany } from '@/api/items';
 import { notFound } from 'next/navigation';
 import FeaturedItem from '@/components/FeaturedItem/FeaturedItem';
 import ItemList from '@/components/Cards/ItemList';

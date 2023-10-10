@@ -2,7 +2,7 @@ import InfoButton from '@/components/InfoButton/InfoButton';
 import ItemList from '@/components/Cards/ItemList';
 import FeaturedItem from '@/components/FeaturedItem/FeaturedItem';
 import GenreList from '@/components/GenreList/GenreList';
-import { getByCategory } from '@/api/item';
+import { getByCategory } from '@/api/items';
 import { notFound } from 'next/navigation';
 import { getCategories } from '@/api/genres';
 import InitialPage from '@/components/InitialPage';
