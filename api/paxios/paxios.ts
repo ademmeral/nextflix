@@ -84,10 +84,17 @@ class Paxios {
   }
   // request
   private async request(config: PaxiosProps) {
-    await this.apply(config);
-    const resp = await fetch(config.url, config);
-    if (resp.ok) return resp;
-    throw new Error('An error has occured while fetching. Plase try again!');
+    try {
+      await this.apply(config);
+      return await fetch(config.url, config);
+    } catch (err) {
+      if (err instanceof Error)
+        throw {
+          name : 'PaxiosError', 
+          message : err.message, 
+          cause : err.cause
+        };
+    }
   }
   // methods
   async get(path: string, conf?: Record<string, any>) {

@@ -6,11 +6,13 @@ import { getByCategory } from '@/api/items';
 import { notFound } from 'next/navigation';
 import { getCategories } from '@/api/genres';
 import InitialPage from '@/components/InitialPage';
+import { delay } from '@/utils/utils';
 
 type MoviesPagePropsType = {
   searchParams : {category:string, id: string},
 }
 async function MoviesPage({searchParams : {category, id}}:MoviesPagePropsType) {
+  // await delay(10000)
   if (!(id||category)) return <InitialPage slug='movie' />;
 
   const [{results}, {genres}] = await Promise.all([

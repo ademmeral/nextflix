@@ -8,18 +8,17 @@ import { getCategories } from '@/api/genres';
 async function InitialPage({slug} : {slug:string}) {
 
   const [
-    { results: topRated }, { results: populars },
-    { results: upcomings }, {genres}
+    { results: topRated }, { results: populars }, {genres}, upcomings
   ] = await Promise.all(
     [
       getMany(`${slug}/top_rated`), getMany(`${slug}/popular`),
-      getMany(`${slug}/upcoming`), getCategories(slug)
-    ]
+      getCategories(slug)
+    ].concat(slug !== 'tv' ? getMany('movie/upcoming') : [])
   ) as Awaited<Promise<[
-    Movies|Series, Movies|Series, Movies|Series, Categories
+    Movies|Series, Movies|Series, Categories, Movies|undefined
   ]>>;
   
-  if (!(topRated || populars || upcomings ||genres))
+  if (!(topRated || populars || genres))
     throw new Error('Something went wrong while fetching data!');
 
   return (
@@ -30,7 +29,10 @@ async function InitialPage({slug} : {slug:string}) {
       <GenreList genres={genres}/>
       <ItemList items={topRated} ctgName="top rated"/>
       <ItemList items={populars} ctgName="populars"/>
-      {slug !== 'tv' && <ItemList items={upcomings} ctgName="upcomings"/>}
+      {upcomings && slug !== 'tv' 
+        ? <ItemList items={upcomings.results} ctgName="upcomings"/>
+        : null
+      }
     </div>
   )
 }

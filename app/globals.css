@@ -12,7 +12,7 @@
   @apply w-full h-full absolute inset-0 -z-10 bg-gradient-to-b from-slate-900/30 to-60% to-slate-900
 }
 main{
-  @apply w-full min-h-calc
+  @apply w-full min-h-calc h-full
 }
 .loader,
 .error,
