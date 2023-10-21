@@ -1,6 +1,6 @@
 'use client';
 
-import { useSlider } from "./useSlider"
+import { useSlider } from "@/components/ReactSlider/useSlider"
 import { useRef } from "react";
 import './rsl.css';
 
@@ -14,25 +14,21 @@ type ReactSliderPropsType = {
 
 function ReactSlider({children, left, right, _class, id}: ReactSliderPropsType) {
   const ref = useRef(null);
-  const listRef = useRef(null);
-  useSlider({
-    parent : '.rsl__container__list',
-    arrows : '.rsl__container__shadow__arrow'
-  }, [ref, listRef])
-
+  useSlider(ref)
+  const cls = _class ? ` ${_class}` : ''
   return (
-    <div className={`rsl__container ${_class ? _class : ''}`.trim()} id={id ? id : ''} ref={ref}>
-      <div className="rsl__container__shadow rsl__hide">
-        <button type="button" className="rsl__container__shadow__arrow">
+    <div className={`rsl_container${cls}`} id={id ? id : ''} ref={ref}>
+      <div className="rsl_shadow rsl_hide">
+        <button type="button" className="rsl_arrow">
           {left}
         </button>
       </div>
-      <div className="rsl__container__shadow">
-        <button type="button" className="rsl__container__shadow__arrow">
+      <div className="rsl_shadow">
+        <button type="button" className="rsl_arrow">
         {right}
         </button>
       </div>
-      <ul className="rsl__container__list" ref={listRef}>
+      <ul className="rsl_list">
         {children}
       </ul>
     </div>

@@ -1,27 +1,19 @@
 import { useEffect, useRef } from "react";
-import independentSmoothScroll from "./independentSmoothScroll";
+import independentSmoothScroll from "@/components/ReactSlider/independentSmoothScroll";
 
-type ReactSlider = {
-  parent: string,
-  arrows: string
-}
 
-export function useSlider(obj: ReactSlider, refs: React.MutableRefObject<HTMLElement | null>[]) {
-  let { current: timeout } = useRef(0)
-
-  if (!(obj.parent || obj.arrows || obj))
-    throw new Error("Parent class and the Arrows class are required!");
+export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
 
   useEffect(() => {
-    const parEvs: [string, EventListener | ((e: PointerEvent) => void)][] = []
-    const arrEvs: [string, EventListener][] = []
+    const parentEvents: [string, EventListener | ((e: PointerEvent) => void)][] = []
+    const arrowEvents: [string, EventListener][] = []
 
-    if (refs[0] && refs[0].current) {
+    if (ref && ref.current) {
       let isDragging = false;
 
       // Getting elements with the given class names
-      const parent = refs[0].current.querySelector<HTMLUListElement>(obj.parent) as HTMLUListElement;
-      const arrows = refs[0].current.querySelectorAll<HTMLElement>(obj.arrows);
+      const parent = ref.current.querySelector<HTMLUListElement>('.rsl_list') as HTMLUListElement;
+      const arrows = ref.current.querySelectorAll<HTMLElement>('.rsl_arrow');
       const [parLeft, parRight] = [arrows[0].parentElement, arrows[1].parentElement];
 
       // Checking if the elements have been found, otherwise throw an Error
@@ -37,7 +29,7 @@ export function useSlider(obj: ReactSlider, refs: React.MutableRefObject<HTMLEle
       const handleMouseDown = () => { isDragging = true }
       const handleMouseUp = () => { isDragging = false };
       const handleMouseLeave = () => { isDragging = false };
-      parEvs.push(
+      parentEvents.push(
         ['pointerdown', handleMouseDown],
         ['pointerup', handleMouseUp],
         ['pointerleave', handleMouseLeave]
@@ -48,25 +40,25 @@ export function useSlider(obj: ReactSlider, refs: React.MutableRefObject<HTMLEle
         const x = Math.round(parent.scrollLeft)
         const xMax = parent.scrollWidth - parent.clientWidth;
         x > 1
-          ? parLeft?.classList.remove('rsl__hide')
-          : parLeft?.classList.add('rsl__hide');
+          ? parLeft?.classList.remove('rsl_hide')
+          : parLeft?.classList.add('rsl_hide');
         xMax > x + 1
-          ? parRight?.classList.remove('rsl__hide')
-          : parRight?.classList.add('rsl__hide');
+          ? parRight?.classList.remove('rsl_hide')
+          : parRight?.classList.add('rsl_hide');
       } // handleIcons
 
-      const scrollConfig = (param: number) => independentSmoothScroll({
-        position : 'x', 
-        element : refs[1].current,
-        target : parent.scrollLeft + param,
-      })
+      const softenScroll = (param:number) => independentSmoothScroll({
+        position : 'x',
+        element : parent,
+        target : parent.scrollLeft + param
+      });
       const handleArrowsClick = (e: Event) => {
         const target = e.currentTarget as HTMLDivElement;
         target.classList.contains('left')
-          ? scrollConfig(-parent.clientWidth)
+          ? softenScroll(-parent.clientWidth)
           : target.classList.contains('right')
-            ? scrollConfig(parent.clientWidth)
-            : parent.scrollLeft += 0;
+            ? softenScroll(parent.clientWidth)
+            : parent.scrollLeft = 0;
         handleIcons();
       }
 
@@ -82,7 +74,7 @@ export function useSlider(obj: ReactSlider, refs: React.MutableRefObject<HTMLEle
       };
 
       const handleScroll = () => { handleIcons() }
-      parEvs.push(
+      parentEvents.push(
         ['pointermove', dragging],
         ['scroll', handleScroll]
       );
@@ -97,21 +89,23 @@ export function useSlider(obj: ReactSlider, refs: React.MutableRefObject<HTMLEle
       arrows.forEach(ar => 
         ar.addEventListener('click', handleArrowsClick) // addEvListener for Arrows
       ); // forEach
-      arrEvs.push(['click', handleArrowsClick])
+      arrowEvents.push(['click', handleArrowsClick])
     }; // topmost if stt
 
     // Cleanings when component is unmounted
     return () => {
+
       const parents = document.querySelectorAll('.rsl__container_list') as NodeListOf<HTMLUListElement>
       if (parents.length) {
 
         parents.forEach(p => {
-          parEvs.forEach(ev => { p.removeEventListener(ev[0] as string, ev[1] as EventListener) });
+          parentEvents.forEach(ev => { p.removeEventListener(ev[0] as string, ev[1] as EventListener) });
           const arrows = p.querySelectorAll('.rsl__container__shadow__arrow') as NodeListOf<HTMLElement>
-          arrows.forEach(a => { arrEvs.forEach( e => { a.removeEventListener(e[0], e[1]) }) });
+          arrows.forEach(a => { arrowEvents.forEach( e => { a.removeEventListener(e[0], e[1]) }) });
         }); // parents forEach
+
       }; // if stt
-      if (timeout) clearTimeout(timeout);
+
     }; // end of the function
 
   }, [])

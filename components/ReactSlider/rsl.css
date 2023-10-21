@@ -1,9 +1,9 @@
-.rsl__container{
+.rsl_container{
   overflow: hidden !important;
   border-radius: 5px;
   position: relative;
 }
-.rsl__container__list{
+.rsl_list{
   scrollbar-width: none;
 
   max-width: 100%;
@@ -17,19 +17,19 @@
 
   list-style: none;
 }
-.rsl__container__list.dragging{
+.rsl_list.dragging{
   scroll-behavior: auto !important;
   cursor: grab;
 }
-.rsl__container__list.dragging :is(a, button){
+.rsl_list.dragging :is(a, button){
   pointer-events: none !important;
 }
 
-.rsl__container__list::-webkit-scrollbar{
+.rsl_list::-webkit-scrollbar{
   display: none;
 }
 
-.rsl__container__shadow{
+.rsl_shadow{
   height: 100%;
   width: max-content;
 
@@ -48,7 +48,7 @@
 
   transition: width .15s linear;
 }
-.rsl__container__shadow__arrow{
+.rsl_arrow{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,11 +61,11 @@
 
   color: rgba(255, 255, 255, .25);
 }
-.rsl__container__shadow__arrow:hover{
+.rsl_arrow:hover{
   /* border: 2px solid rgba(255, 255, 255, .5); */
   color: rgba(255, 255, 255, .5);
 }
-.rsl__container__shadow:first-of-type{
+.rsl_shadow:first-of-type{
   background-image: linear-gradient(
     to right, 
     #000 30%, 
@@ -75,7 +75,7 @@
   );
   left: -2px;
 }
-.rsl__container__shadow:last-of-type{
+.rsl_shadow:last-of-type{
   background-image: linear-gradient(
     to left, 
     #000 30%, 
@@ -86,7 +86,7 @@
   right: -2px;
 }
 
-.rsl__hide{
+.rsl_hide{
   width: 0;
   height: 0;
   overflow: hidden !important;
