@@ -7,7 +7,7 @@ type PropsType = {
   color?:string,
   thickness?:number,
 }
-function ReactLoader({size, color, thickness}: PropsType) {
+function ReactSpinner({size, color, thickness}: PropsType) {
   const parentStyle = {
     width : size ? `${size}px` : '100px',
     height : size ? `${size}px` : '100px',
@@ -38,4 +38,4 @@ function ReactLoader({size, color, thickness}: PropsType) {
   )
 }
 
-export default ReactLoader
+export default ReactSpinner
