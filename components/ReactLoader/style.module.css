@@ -1,26 +1,23 @@
-.loader {
-    @apply h-full grid place-items-center text-white gap-[1.5rem];
+.container {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    gap: 1.5rem;
 }
 
 /*====== SPINNER ====== */
-.spinner {
-    width: 100px;
-    height: 100px;
+.wrapper{
     position: relative;
 }
+.spinners {
+    border-radius: 50%;
 
-.spinner::after {
-    content: '';
-
-    display: block;
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
 
     position: absolute;
     inset: 0;
 
-    border: 3px solid rgba(255, 255, 255, .3);
-    border-top-color: #fff;
     border-radius: 50%;
 
     animation: spin 1s infinite;

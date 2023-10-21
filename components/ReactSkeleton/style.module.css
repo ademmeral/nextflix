@@ -1,7 +1,16 @@
-.skeleton {
-    @apply flex-1 h-full relative overflow-hidden
+.skeletonContainer{
+    height: max-content;
+    width: 100%;
 }
-
+.skeletonList{
+    height: 100%;
+    display: flex;
+    gap: 1rem;
+}
+.skeleton {
+    position: relative;
+    overflow: hidden;
+}
 .skeleton::before {
     content: '';
     display: block;
@@ -10,7 +19,6 @@
 
     position: absolute;
     inset: 0;
-
 
     background: linear-gradient(90deg, #888, #bbb, #888);
     background-size: 200%;

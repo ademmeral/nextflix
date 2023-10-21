@@ -31,7 +31,9 @@
 
 .rsl__container__shadow{
   height: 100%;
-  width: 100px;
+  width: max-content;
+
+  padding: 0 .5rem;
 
   position: absolute;
   top: 0;

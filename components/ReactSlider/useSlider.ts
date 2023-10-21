@@ -1,28 +1,28 @@
 import { useEffect, useRef } from "react";
+import independentSmoothScroll from "./independentSmoothScroll";
 
 type ReactSlider = {
   parent: string,
   arrows: string
 }
 
-export function useSlider(obj: ReactSlider, ref: React.MutableRefObject<HTMLElement | null>) {
+export function useSlider(obj: ReactSlider, refs: React.MutableRefObject<HTMLElement | null>[]) {
   let { current: timeout } = useRef(0)
 
   if (!(obj.parent || obj.arrows || obj))
     throw new Error("Parent class and the Arrows class are required!");
 
   useEffect(() => {
-    // const containers = document.querySelectorAll('.rsl__container') as NodeListOf<HTMLElement>
     const parEvs: [string, EventListener | ((e: PointerEvent) => void)][] = []
     const arrEvs: [string, EventListener][] = []
 
-    if (ref && ref.current) {
+    if (refs[0] && refs[0].current) {
       let isDragging = false;
 
       // Getting elements with the given class names
-      const parent = ref.current.querySelector<HTMLUListElement>(obj.parent) as HTMLUListElement;
-      const arrows = ref.current.querySelectorAll<HTMLElement>(obj.arrows);
-      const [parLeft, parRight] = [arrows[0].parentElement, arrows[1].parentElement]
+      const parent = refs[0].current.querySelector<HTMLUListElement>(obj.parent) as HTMLUListElement;
+      const arrows = refs[0].current.querySelectorAll<HTMLElement>(obj.arrows);
+      const [parLeft, parRight] = [arrows[0].parentElement, arrows[1].parentElement];
 
       // Checking if the elements have been found, otherwise throw an Error
       if (!(parent || arrows.length))
@@ -55,13 +55,18 @@ export function useSlider(obj: ReactSlider, ref: React.MutableRefObject<HTMLElem
           : parRight?.classList.add('rsl__hide');
       } // handleIcons
 
+      const scrollConfig = (param: number) => independentSmoothScroll({
+        position : 'x', 
+        element : refs[1].current,
+        target : parent.scrollLeft + param
+      })
       const handleArrowsClick = (e: Event) => {
         const target = e.currentTarget as HTMLDivElement;
-        parent.scrollLeft += target.classList.contains('left')
-          ? -350
+        target.classList.contains('left')
+          ? scrollConfig(-350)
           : target.classList.contains('right')
-            ? 350
-            : 0;
+            ? scrollConfig(350)
+            : parent.scrollLeft += 0;
         handleIcons();
       }
 
