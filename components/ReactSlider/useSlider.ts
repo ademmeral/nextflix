@@ -58,14 +58,14 @@ export function useSlider(obj: ReactSlider, refs: React.MutableRefObject<HTMLEle
       const scrollConfig = (param: number) => independentSmoothScroll({
         position : 'x', 
         element : refs[1].current,
-        target : parent.scrollLeft + param
+        target : parent.scrollLeft + param,
       })
       const handleArrowsClick = (e: Event) => {
         const target = e.currentTarget as HTMLDivElement;
         target.classList.contains('left')
-          ? scrollConfig(-350)
+          ? scrollConfig(-parent.clientWidth)
           : target.classList.contains('right')
-            ? scrollConfig(350)
+            ? scrollConfig(parent.clientWidth)
             : parent.scrollLeft += 0;
         handleIcons();
       }
