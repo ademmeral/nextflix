@@ -1,6 +1,5 @@
-import { getOne } from "@/api/items";
 import SingleItem from "@/components/SingleItem/SingleItem";
-import { delay } from "@/utils/utils";
+import { delay, getOne } from "@/utils/utils";
 import { notFound } from "next/navigation";
 
 type SingleSerieProps = {

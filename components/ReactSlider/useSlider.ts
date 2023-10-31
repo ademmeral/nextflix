@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import independentSmoothScroll from "@/components/ReactSlider/independentSmoothScroll";
+import xSmoothScroll from "@/components/ReactSlider/xSmoothScroll";
 
 
 export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
@@ -47,7 +47,7 @@ export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
           : parRight?.classList.add('rsl_hide');
       } // handleIcons
 
-      const softenScroll = (param:number) => independentSmoothScroll({
+      const softenScroll = (param:number) => xSmoothScroll({
         position : 'x',
         element : parent,
         target : parent.scrollLeft + param

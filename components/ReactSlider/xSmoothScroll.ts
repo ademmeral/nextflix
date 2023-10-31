@@ -1,5 +1,5 @@
-export default function independentSmoothScroll(obj: Record<string, any>) {
-
+export default function xSmoothScroll(obj: Record<string, any>) {
+  // https://github.com/ademmeral/modules/xSmoothScroll
   let reqId: number;
   if (!obj.position) obj.position = 'y';
   if (!obj.target) obj.target = 0;

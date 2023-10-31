@@ -1,10 +1,9 @@
 import InfoButton from '@/components/InfoButton/InfoButton';
-import { getByCategory, getMany } from '@/api/items';
 import { notFound } from 'next/navigation';
 import FeaturedItem from '@/components/FeaturedItem/FeaturedItem';
 import ItemList from '@/components/Cards/ItemList';
 import GenreList from '@/components/GenreList/GenreList';
-import { getCategories } from '@/api/genres';
+import { getCategories, getByCategory } from '@/utils/utils';
 import InitialPage from '@/components/InitialPage';
 
 type SeriesPagePropsType = {

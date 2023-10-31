@@ -2,11 +2,9 @@ import InfoButton from '@/components/InfoButton/InfoButton';
 import ItemList from '@/components/Cards/ItemList';
 import FeaturedItem from '@/components/FeaturedItem/FeaturedItem';
 import GenreList from '@/components/GenreList/GenreList';
-import { getByCategory } from '@/api/items';
 import { notFound } from 'next/navigation';
-import { getCategories } from '@/api/genres';
 import InitialPage from '@/components/InitialPage';
-import { delay } from '@/utils/utils';
+import { delay, getByCategory, getCategories } from '@/utils/utils';
 
 type MoviesPagePropsType = {
   searchParams : {category:string, id: string},

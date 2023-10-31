@@ -1,7 +1,6 @@
 import SingleItem from "@/components/SingleItem/SingleItem";
 import { notFound } from "next/navigation";
-import { getOne } from "@/api/items";
-import { delay } from "@/utils/utils";
+import { delay, getOne } from "@/utils/utils";
 
 type SingleMovieProps = {
     searchParams : {id: string} 

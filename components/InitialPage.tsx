@@ -2,8 +2,7 @@ import InfoButton from '@/components/InfoButton/InfoButton';
 import ItemList from '@/components/Cards/ItemList';
 import FeaturedItem from '@/components/FeaturedItem/FeaturedItem';
 import GenreList from '@/components/GenreList/GenreList';
-import { getMany } from '@/api/items';
-import { getCategories } from '@/api/genres';
+import { getCategories, getMany } from '@/utils/utils';
 
 async function InitialPage({slug} : {slug:string}) {
 
