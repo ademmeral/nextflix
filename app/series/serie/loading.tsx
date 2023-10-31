@@ -1,7 +1,7 @@
-import ReactLoader from "@/components/ReactLoader/ReactLoader";
+import ReactSpinner from "@/components/ReactSpinner/ReactSpinner";
 
 function MovieLoading() {
-  return <ReactLoader />
+  return <ReactSpinner />
 }
 
 export default MovieLoading

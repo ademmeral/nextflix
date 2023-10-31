@@ -21,7 +21,7 @@ class XFetch {
 
   constructor(config: XFetchConfig) {
     this.config = config;
-    this.url = new URL(decodeURIComponent(config.baseUrl));
+    this.url = new URL(config.baseUrl);
     this.controller = new AbortController();
     this.headers = new Headers(
       Object.defineProperty(
@@ -86,7 +86,7 @@ class XFetch {
       else (this.url as any)[key] = config[key];
   }
   setConfig(config: XFetchConfig){
-    const excludedKeys = ['headers', 'url', 'baseUrl', 'searchParams']
+    const excludedKeys = ['headers', 'url', 'baseUrl', 'searchParams'];
     if ('headers' in config)
       this.setHeaders(config.headers);
     if ('url' in config)
@@ -113,7 +113,6 @@ class XFetch {
   async handleRequest(config: XFetchConfig): Promise<XFetchResponse> {
 
     try {
-
       if (this.controller.signal.aborted)
         throw new Error('Request has been canceled!');
       
@@ -122,7 +121,7 @@ class XFetch {
       newRequest.signal = this.controller.signal;
       const decodedHref = decodeURIComponent(this.url.href); 
       const request = new Request(decodedHref, newRequest);
-      
+      console.log(decodeURIComponent(this.url.href))
       await this.apply();
       const response = await fetch(request);
       return response;

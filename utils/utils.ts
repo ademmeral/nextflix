@@ -12,21 +12,21 @@ export function compact(str: string, max: number) {
   return `${text.slice(0, index)}...`
 }
 
+/* ======= MOVIES & GENRES ========== */
+
 
 export async function getCategories(param: string): Promise<Categories | undefined> {
   try {
-    const resp = await XFetch.get(`genre/${param}/list?language=en`);
+    const resp = await XFetch.get(`3/genre/${param}/list?language=en`);
     return await resp.json()
   } catch (err) {
     console.log(err)
   }
 }
 
-/* ======= MOVIES ========== */
-
 export async function getMany(param: string): Promise<Movies | Series | undefined> {
   try {
-    const resp = await XFetch.get(`${param}?language=en-US&page=1`) as Response;
+    const resp = await XFetch.get(`3/${param}?language=en-US&page=1`) as Response;
     return await resp.json() as Awaited<Promise<Movies | Series>>
   } catch (err) {
     throw new Error('Failed to fetch data');
@@ -35,7 +35,7 @@ export async function getMany(param: string): Promise<Movies | Series | undefine
 export async function getOne(param: string): Promise<SingleItemType | undefined> {
 
   try {
-    const resp = await XFetch.get(`${param}?language=en-US`) as Response;
+    const resp = await XFetch.get(`3/${param}?language=en-US`) as Response;
     return await resp.json() as Awaited<Promise<SingleItemType>>
   } catch (err) {
     throw new Error('Failed to fetch data');
@@ -43,7 +43,7 @@ export async function getOne(param: string): Promise<SingleItemType | undefined>
 }
 export async function getByCategory(type: string, id: string): Promise<Movies | Series | undefined> {
   try {
-    const resp = await XFetch.get(`discover/${type}?language=en-US&page=1&with_genres=${id}`) as Response
+    const resp = await XFetch.get(`3/discover/${type}?language=en-US&page=1&with_genres=${id}`) as Response
     return await resp.json() as Awaited<Promise<Movies | Series>>
   } catch (err) {
     throw new Error('Failed to fetch data');
