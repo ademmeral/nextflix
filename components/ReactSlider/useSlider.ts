@@ -1,9 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import xSmoothScroll from "@/components/ReactSlider/xSmoothScroll";
 
-
+// https://github.com/ademmeral/hooks/useSlider
 export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
-
+  
   useEffect(() => {
     const parentEvents: [string, EventListener | ((e: PointerEvent) => void)][] = []
     const arrowEvents: [string, EventListener][] = []
@@ -12,19 +12,19 @@ export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
       let isDragging = false;
 
       // Getting elements with the given class names
-      const parent = ref.current.querySelector<HTMLUListElement>('.rsl_list') as HTMLUListElement;
+      const wrapperList = ref.current.querySelector<HTMLUListElement>('.rsl_list') as HTMLUListElement;
       const arrows = ref.current.querySelectorAll<HTMLElement>('.rsl_arrow');
-      const [parLeft, parRight] = [arrows[0].parentElement, arrows[1].parentElement];
+      const [leftArrowParent, rightArrowParent] = [arrows[0].parentElement, arrows[1].parentElement];
 
       // Checking if the elements have been found, otherwise throw an Error
-      if (!(parent || arrows.length))
+      if (!(wrapperList || arrows.length))
         throw new Error('There are no such elements. Please check the classes');
       
       // One of the arrows should contain class named 'left' and the other 'right', otherwise iamma include
-      if (!arrows[0].classList.contains('left'))
-        arrows[0].classList.add('left');
-      if (!arrows[1].classList.contains('right'))
-        arrows[1].classList.add('right');
+      if (!arrows[0].classList.contains('rsl_arrow_left'))
+        arrows[0].classList.add('rsl_arrow_left');
+      if (!arrows[1].classList.contains('rsl_arrow_right'))
+        arrows[1].classList.add('rsl_arrow_right');
 
       const handleMouseDown = () => { isDragging = true }
       const handleMouseUp = () => { isDragging = false };
@@ -37,40 +37,41 @@ export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
 
       // Handling visiblity of Arrows
       const handleIcons = () => {
-        const x = Math.round(parent.scrollLeft)
-        const xMax = parent.scrollWidth - parent.clientWidth;
+        const x = Math.round(wrapperList.scrollLeft)
+        const xMax = wrapperList.scrollWidth - wrapperList.clientWidth;
         x > 1
-          ? parLeft?.classList.remove('rsl_hide')
-          : parLeft?.classList.add('rsl_hide');
+          ? leftArrowParent?.classList.remove('rsl_hide')
+          : leftArrowParent?.classList.add('rsl_hide');
         xMax > x + 1
-          ? parRight?.classList.remove('rsl_hide')
-          : parRight?.classList.add('rsl_hide');
+          ? rightArrowParent?.classList.remove('rsl_hide')
+          : rightArrowParent?.classList.add('rsl_hide');
       } // handleIcons
 
-      const softenScroll = (param:number) => xSmoothScroll({
+      const scrollConfig = {
         position : 'x',
-        element : parent,
-        target : parent.scrollLeft + param
-      });
+        element : wrapperList,
+        target : wrapperList.scrollLeft
+      }
       const handleArrowsClick = (e: Event) => {
         const target = e.currentTarget as HTMLDivElement;
-        target.classList.contains('left')
-          ? softenScroll(-parent.clientWidth)
-          : target.classList.contains('right')
-            ? softenScroll(parent.clientWidth)
-            : parent.scrollLeft = 0;
+        target.classList.contains('rsl_arrow_left')
+          ? scrollConfig.target -= wrapperList.clientWidth
+          : target.classList.contains('rsl_arrow_right')
+            ? scrollConfig.target += wrapperList.clientWidth
+            : wrapperList.scrollLeft = 0;
         handleIcons();
+        xSmoothScroll(scrollConfig);
       }
 
       // Handling draggability of UL Element
       const dragging = (e: PointerEvent) => {
         e.preventDefault();
         if (!isDragging) {
-          parent.classList.remove('dragging');
+          wrapperList.classList.remove('dragging');
           return;
         }
-        parent.classList.add('dragging')
-        parent.scrollLeft -= e.movementX / 2;
+        wrapperList.classList.add('dragging')
+        wrapperList.scrollLeft -= e.movementX / 2;
       };
 
       const handleScroll = () => { handleIcons() }
@@ -79,28 +80,26 @@ export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
         ['scroll', handleScroll]
       );
 
-      parent.addEventListener('pointerdown', handleMouseDown);
-      parent.addEventListener('pointermove', dragging);
-      parent.addEventListener('pointerleave', handleMouseLeave);
-      parent.addEventListener('pointerup', handleMouseUp);
-      parent.addEventListener('scroll', handleScroll);
+      for (const [event, handler] of parentEvents)
+        wrapperList.addEventListener(event as string, handler as EventListener);
 
       // Adding EventListener to Arrows
-      arrows.forEach(ar => 
-        ar.addEventListener('click', handleArrowsClick) // addEvListener for Arrows
-      ); // forEach
-      arrowEvents.push(['click', handleArrowsClick])
+      // I find for loop sexier than forEach
+      for (const arrow of arrows)
+        arrow.addEventListener('click', handleArrowsClick);
+
+      arrowEvents.push(['click', handleArrowsClick]);
     }; // topmost if stt
 
     // Cleanings when component is unmounted
     return () => {
 
-      const parents = document.querySelectorAll('.rsl__container_list') as NodeListOf<HTMLUListElement>
-      if (parents.length) {
+      const wrapperLists = document.querySelectorAll<HTMLUListElement>('.rsl_list');
+      if (wrapperLists.length) {
 
-        parents.forEach(p => {
+        wrapperLists.forEach(p => {
           parentEvents.forEach(ev => { p.removeEventListener(ev[0] as string, ev[1] as EventListener) });
-          const arrows = p.querySelectorAll('.rsl__container__shadow__arrow') as NodeListOf<HTMLElement>
+          const arrows = p.querySelectorAll<HTMLElement>('.rsl_arrow');
           arrows.forEach(a => { arrowEvents.forEach( e => { a.removeEventListener(e[0], e[1]) }) });
         }); // parents forEach
 

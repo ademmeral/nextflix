@@ -1,5 +1,5 @@
 'use client';
-
+// https://github.com/ademmeral/components/ReactSlider
 import { useSlider } from "@/components/ReactSlider/useSlider"
 import { useRef } from "react";
 import './rsl.css';
@@ -14,7 +14,7 @@ type ReactSliderPropsType = {
 
 function ReactSlider({children, left, right, _class, id}: ReactSliderPropsType) {
   const ref = useRef(null);
-  useSlider(ref)
+  useSlider(ref); // returns undefined
   const cls = _class ? ` ${_class}` : ''
   return (
     <div className={`rsl_container${cls}`} id={id ? id : ''} ref={ref}>

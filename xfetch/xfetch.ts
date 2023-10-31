@@ -121,7 +121,7 @@ class XFetch {
       newRequest.signal = this.controller.signal;
       const decodedHref = decodeURIComponent(this.url.href); 
       const request = new Request(decodedHref, newRequest);
-      console.log(decodeURIComponent(this.url.href))
+      
       await this.apply();
       const response = await fetch(request);
       return response;
