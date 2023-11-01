@@ -1,4 +1,4 @@
-.container {
+.xrspinner_container {
     height: 100%;
     display: grid;
     place-items: center;
@@ -6,10 +6,10 @@
 }
 
 /*====== SPINNER ====== */
-.wrapper{
+.xrspinner_wrapper{
     position: relative;
 }
-.spinners {
+.xrspinner_circle {
     border-radius: 50%;
 
     width: 100%;

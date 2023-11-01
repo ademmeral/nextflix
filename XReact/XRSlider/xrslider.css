@@ -1,9 +1,9 @@
-.rsl_container{
+.xrslider_container{
   overflow: hidden !important;
   border-radius: 5px;
   position: relative;
 }
-.rsl_list{
+.xrslider_list{
   scrollbar-width: none;
 
   max-width: 100%;
@@ -17,19 +17,19 @@
 
   list-style: none;
 }
-.rsl_list.dragging{
+.xrslider_list.dragging{
   scroll-behavior: auto !important;
   cursor: grab;
 }
-.rsl_list.dragging :is(a, button){
+.xrslider_list.dragging :is(a, button){
   pointer-events: none !important;
 }
 
-.rsl_list::-webkit-scrollbar{
+.xrslider_list::-webkit-scrollbar{
   display: none;
 }
 
-.rsl_shadow{
+.xrslider_shadow{
   height: 100%;
   width: max-content;
 
@@ -48,7 +48,7 @@
 
   transition: width .15s linear;
 }
-.rsl_arrow{
+.xrslider_arrow{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,11 +61,11 @@
 
   color: rgba(255, 255, 255, .25);
 }
-.rsl_arrow:hover{
+.xrslider_arrow:hover{
   /* border: 2px solid rgba(255, 255, 255, .5); */
   color: rgba(255, 255, 255, .5);
 }
-.rsl_shadow:first-of-type{
+.xrslider_shadow:first-of-type{
   background-image: linear-gradient(
     to right, 
     #000 30%, 
@@ -75,7 +75,7 @@
   );
   left: -2px;
 }
-.rsl_shadow:last-of-type{
+.xrslider_shadow:last-of-type{
   background-image: linear-gradient(
     to left, 
     #000 30%, 
@@ -86,7 +86,7 @@
   right: -2px;
 }
 
-.rsl_hide{
+.xrslider_hide{
   width: 0;
   height: 0;
   overflow: hidden !important;

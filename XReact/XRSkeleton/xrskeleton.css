@@ -1,17 +1,17 @@
-.skeletonContainer{
+.xxrskeletonleton_container{
     height: max-content;
     width: 100%;
 }
-.skeletonList{
+.xrskeleton_list{
     height: 100%;
     display: flex;
     gap: 1rem;
 }
-.skeleton {
+.xrskeleton {
     position: relative;
     overflow: hidden;
 }
-.skeleton::before {
+.xrskeleton::before {
     content: '';
     display: block;
     width: 100%;

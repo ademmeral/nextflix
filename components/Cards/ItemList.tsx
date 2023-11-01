@@ -1,17 +1,17 @@
 import Item from "./Item";
-import ReactSlider from "@/components/ReactSlider/ReactSlider";
+import XRSlider from "@/XReact/XRSlider/XRSlider";
 import { LiaAngleRightSolid, LiaAngleLeftSolid } from 'react-icons/lia'
 import s from './style.module.css';
 
 type ItemListProps = {items : (Movie[]|Serie[]), ctgName:string};
 
-function ItemList({items, ctgName}: ItemListProps) {
+export default function ItemList({items, ctgName}: ItemListProps) {
 
   return (
     <div className={`${s.categories}`}>
       <div className={`${s.category}`}>
         <h3>{ctgName?.toUpperCase()}</h3>
-        <ReactSlider 
+        <XRSlider 
           left={<LiaAngleLeftSolid size={50}/>}
           right={<LiaAngleRightSolid size={50}/>}
           id="movies"
@@ -21,10 +21,8 @@ function ItemList({items, ctgName}: ItemListProps) {
               item={it}
             />
           )}
-        </ReactSlider>
+        </XRSlider>
       </div>
     </div>
   )
 }
-
-export default ItemList

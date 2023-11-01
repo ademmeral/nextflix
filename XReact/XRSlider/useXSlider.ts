@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import xSmoothScroll from "@/components/ReactSlider/xSmoothScroll";
+// https://github.com/ademmeral/XReact/hooks/useXSlider
 
-// https://github.com/ademmeral/hooks/useSlider
+import { useEffect } from "react";
+import xSmoothScroll from "./xSmoothScroll";
+
 export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
   
   useEffect(() => {
@@ -12,8 +13,8 @@ export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
       let isDragging = false;
 
       // Getting elements with the given class names
-      const wrapperList = ref.current.querySelector<HTMLUListElement>('.rsl_list') as HTMLUListElement;
-      const arrows = ref.current.querySelectorAll<HTMLElement>('.rsl_arrow');
+      const wrapperList = ref.current.querySelector<HTMLUListElement>('.xrslider_list') as HTMLUListElement;
+      const arrows = ref.current.querySelectorAll<HTMLElement>('.xrslider_arrow');
       const [leftArrowParent, rightArrowParent] = [arrows[0].parentElement, arrows[1].parentElement];
 
       // Checking if the elements have been found, otherwise throw an Error
@@ -21,10 +22,10 @@ export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
         throw new Error('There are no such elements. Please check the classes');
       
       // One of the arrows should contain class named 'left' and the other 'right', otherwise iamma include
-      if (!arrows[0].classList.contains('rsl_arrow_left'))
-        arrows[0].classList.add('rsl_arrow_left');
-      if (!arrows[1].classList.contains('rsl_arrow_right'))
-        arrows[1].classList.add('rsl_arrow_right');
+      if (!arrows[0].classList.contains('xrslider_arrow_left'))
+        arrows[0].classList.add('xrslider_arrow_left');
+      if (!arrows[1].classList.contains('xrslider_arrow_right'))
+        arrows[1].classList.add('xrslider_arrow_right');
 
       const handleMouseDown = () => { isDragging = true }
       const handleMouseUp = () => { isDragging = false };
@@ -40,27 +41,23 @@ export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
         const x = Math.round(wrapperList.scrollLeft)
         const xMax = wrapperList.scrollWidth - wrapperList.clientWidth;
         x > 1
-          ? leftArrowParent?.classList.remove('rsl_hide')
-          : leftArrowParent?.classList.add('rsl_hide');
+          ? leftArrowParent?.classList.remove('xrslider_hide')
+          : leftArrowParent?.classList.add('xrslider_hide');
         xMax > x + 1
-          ? rightArrowParent?.classList.remove('rsl_hide')
-          : rightArrowParent?.classList.add('rsl_hide');
+          ? rightArrowParent?.classList.remove('xrslider_hide')
+          : rightArrowParent?.classList.add('xrslider_hide');
       } // handleIcons
 
-      const scrollConfig = {
-        position : 'x',
-        element : wrapperList,
-        target : wrapperList.scrollLeft
-      }
+      let scrollTarget = wrapperList.scrollLeft;
       const handleArrowsClick = (e: Event) => {
         const target = e.currentTarget as HTMLDivElement;
-        target.classList.contains('rsl_arrow_left')
-          ? scrollConfig.target -= wrapperList.clientWidth
-          : target.classList.contains('rsl_arrow_right')
-            ? scrollConfig.target += wrapperList.clientWidth
+        target.classList.contains('xrslider_arrow_left')
+          ? scrollTarget -= wrapperList.clientWidth
+          : target.classList.contains('xrslider_arrow_right')
+            ? scrollTarget += wrapperList.clientWidth
             : wrapperList.scrollLeft = 0;
         handleIcons();
-        xSmoothScroll(scrollConfig);
+        xSmoothScroll(wrapperList, 'x', scrollTarget);
       }
 
       // Handling draggability of UL Element
@@ -80,8 +77,8 @@ export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
         ['scroll', handleScroll]
       );
 
-      for (const [event, handler] of parentEvents)
-        wrapperList.addEventListener(event as string, handler as EventListener);
+      for (const [event, listener] of parentEvents)
+        wrapperList.addEventListener(event as string, listener as EventListener);
 
       // Adding EventListener to Arrows
       // I find for loop sexier than forEach
@@ -94,12 +91,12 @@ export function useSlider(ref: React.MutableRefObject<HTMLElement | null>) {
     // Cleanings when component is unmounted
     return () => {
 
-      const wrapperLists = document.querySelectorAll<HTMLUListElement>('.rsl_list');
+      const wrapperLists = document.querySelectorAll<HTMLUListElement>('.xrslider_list');
       if (wrapperLists.length) {
 
         wrapperLists.forEach(p => {
           parentEvents.forEach(ev => { p.removeEventListener(ev[0] as string, ev[1] as EventListener) });
-          const arrows = p.querySelectorAll<HTMLElement>('.rsl_arrow');
+          const arrows = p.querySelectorAll<HTMLElement>('.xrslider_arrow');
           arrows.forEach(a => { arrowEvents.forEach( e => { a.removeEventListener(e[0], e[1]) }) });
         }); // parents forEach
 

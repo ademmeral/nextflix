@@ -1,7 +1,7 @@
-import ReactSpinner from "@/components/ReactSpinner/ReactSpinner";
+import XR from "@/XReact/components/XRSpinner/XRSpinner"
 
 function MovieLoading() {
-  return <ReactSpinner />
+  return <XR.Spinner className="movie_spinner" id='movie_spinner' />
 }
 
 export default MovieLoading

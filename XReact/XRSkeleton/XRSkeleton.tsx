@@ -1,34 +1,35 @@
-'use client';
+// https://github.com/ademmeral/XReact/components/XRSkeleton
 
-import s from './style.module.css';
+'use client'; // for nextjs
+
+import './xrskeleton.css';
 
 type PropsType = {
   h?: number,
   w?:number,
   amount : Required<number>,
   rounded ?: number|string,
-  _class ?: string,
+  className ?: string,
   id?: string,
 }
 
-function ReactSkeleton({h, w, amount, rounded, _class, id} : PropsType) {
+function XRSkeleton({h, w, amount, rounded, className, id} : PropsType) {
 
   const styleLi = {
     borderRadius : !rounded ? 0 : typeof rounded === 'string' ? rounded : `${rounded}px`,
     height: h ? `${h}px` : '100%',
     width : w ? `${w}px` : 'auto',
-    flex: !w ? `1` : '',
+    flex: !w ? `1` : 'auto',
   }
 
-  const cls = _class ? ' ' + _class : '';
   return (
-    <div className={`${s.skeletonContainer}`}>
-      <ul className={s.skeletonList} >
+    <div className={`xrskeleton_container` + className ? ` ${className}` : ''}>
+      <ul className="xrskeleton_list" >
         {[...Array(amount).keys()]
           .map((k) => (
           <li 
             key={k} 
-            className={`${s.skeleton}${cls}`}
+            className={`xrskeleton`}
             style={styleLi}
             id={id ? id : ''}
           ></li>
@@ -37,5 +38,4 @@ function ReactSkeleton({h, w, amount, rounded, _class, id} : PropsType) {
     </div>
   )
 }
-
-export default ReactSkeleton
+export default XRSkeleton

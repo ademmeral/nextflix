@@ -1,4 +1,4 @@
-import XFetch from '@/xfetch/api';
+import XFetch from '@/XFetch/api';
 
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))

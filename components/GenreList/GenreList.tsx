@@ -1,12 +1,12 @@
 import Genre from "./Genre";
-import ReactSlider from "@/components/ReactSlider/ReactSlider";
+import XRSlider from "@/XReact/XRSlider/XRSlider";
 // import { usePathname } from "next/navigation";
 import { LiaAngleRightSolid, LiaAngleLeftSolid } from 'react-icons/lia'
 
 async function GenreList({genres} : {genres?:Category[]}) {
 
   return (
-    <ReactSlider 
+    <XRSlider 
       left={<LiaAngleLeftSolid size={30}/>} 
       right = {<LiaAngleRightSolid size={30}/>}
       id="genre_slide"
@@ -14,7 +14,7 @@ async function GenreList({genres} : {genres?:Category[]}) {
       {genres?.map((gen,i) => (
         <Genre key={i + 8978} gen={gen} />
       ))}
-    </ReactSlider>
+    </XRSlider>
   )
 }
 
