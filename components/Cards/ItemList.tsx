@@ -1,5 +1,5 @@
 import Item from "./Item";
-import XRSlider from "@/XReact/XRSlider/XRSlider";
+import XRSlider from "@/XReact/components/XRSlider/XRSlider";
 import { LiaAngleRightSolid, LiaAngleLeftSolid } from 'react-icons/lia'
 import s from './style.module.css';
 

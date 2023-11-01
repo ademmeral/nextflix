@@ -1,5 +1,5 @@
 import Genre from "./Genre";
-import XRSlider from "@/XReact/XRSlider/XRSlider";
+import XRSlider from "@/XReact/components/XRSlider/XRSlider";
 // import { usePathname } from "next/navigation";
 import { LiaAngleRightSolid, LiaAngleLeftSolid } from 'react-icons/lia'
 

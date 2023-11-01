@@ -1,5 +1,5 @@
-import XRSkeleton from '@/XReact/XRSkeleton/XRSkeleton'
-import XRSpinner from '@/XReact/XRSpinner/XRSpinner'
+import XRSkeleton from '@/XReact/components/XRSkeleton/XRSkeleton'
+import XRSpinner from '@/XReact/components/XRSpinner/XRSpinner'
 
 function LoadingPage() {
   return (
