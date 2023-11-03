@@ -5,8 +5,8 @@
   + Typescript
   + React Icons (react-icons)
   + TMDB Movie API
-  + [XFetch](!https://github.com/ademmeral/XFetch)
-  + [XReact](!https://github.com/ademmeral/XReact)
+  + [XFetch](https://github.com/ademmeral/XFetch)
+  + [XReact](https://github.com/ademmeral/XReact)
 
 Since the app requires an access token to TMDB Movie API, I didnt deploy it.
 If you wanna test it in you local environment ;
